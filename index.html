@@ -321,20 +321,14 @@ head(gift)
 
 <div style='float:left;width:48%;' class='centered'>
   <pre><code class="r">library(rgdal)
-london.shp &lt;- readOGR(dsn = &quot;F:\\Work\\Greenpeace\\R Skillshare\\Data\\ESRI&quot;, layer = &quot;London_Borough_Excluding_MHW&quot;)
+london.shp &lt;- readOGR(dsn = &quot;F:\\Work\\Greenpeace\\R Skillshare\\Data\\London&quot;, 
+    layer = &quot;London_Borough_Excluding_MHW&quot;)
 plot(london.shp)
 </code></pre>
 
 </div>
 <div style='float:right;width:48%;'>
-  <pre><code>## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open data source
-</code></pre>
-
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;london.shp&#39; not found
-</code></pre>
-
-<pre><code>## Error in plot(london.shp): object &#39;london.shp&#39; not found
-</code></pre>
+  <p><img src="assets/fig/unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7"></p>
 
 </div>
   </article>
@@ -416,7 +410,7 @@ gift.ag1 &lt;- as.data.frame(as.list(aggregate(Amount ~ Year + month + GROUP,
                          )
 
 Sys.time() - start.time
-Time difference of 2.851626 secs
+Time difference of 3.417091 secs
 </code></pre>
 
 </div>
@@ -463,7 +457,7 @@ gift.ag &lt;- gift.dt[,list(Count = length(Amount),
                          Total = sum(Amount)), 
                    by = list(Year, month, GROUP)]
 Sys.time() - start.time
-Time difference of 0.08467889 secs
+Time difference of 0.09307098 secs
 </code></pre>
 
 </div>
@@ -575,11 +569,9 @@ This text is red
     <h2>Interactive plot</h2>
   </hgroup>
   <article data-timings="">
-     
-<div class='row-fluid'>
-  <div class='span5'>
-    <form id="knitForm19" data-cell="19">
-      <pre><code class="r">library(googleVis)
+    
+<div style='float:left;width:48%;' class='centered'>
+  <pre><code class="r">library(googleVis)
 #options(gvis.plot.tag=&#39;chart&#39;)
 gmotion &lt;- gvisMotionChart(gift.ag,
                            idvar = &quot;GROUP&quot;,
@@ -591,16 +583,18 @@ gmotion &lt;- gvisMotionChart(gift.ag,
 print(gmotion, tag = &#39;chart&#39;)
 </code></pre>
 
-<!-- MotionChart generated in R 3.3.1 by googleVis 0.6.1 package -->
+</div>
+<div style='float:right;width:48%;'>
+  <!-- MotionChart generated in R 3.3.1 by googleVis 0.6.1 package -->
 
-<!-- Fri Nov 18 23:38:07 2016 -->
+<!-- Fri Nov 18 23:51:51 2016 -->
 
 <!-- jsHeader -->
 
 <script type="text/javascript">
  
 // jsData 
-function gvisDataMotionChartID20ec54876a07 () {
+function gvisDataMotionChartID20ec1063125 () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -660,12 +654,12 @@ new Date(2013,4,1),
 ],
 [
 "Door Recurring",
-new Date(2016,6,1),
-2016,
-7,
-7980,
-19.71189975,
-157300.96
+new Date(2013,5,1),
+2013,
+6,
+10379,
+17.77368629,
+184473.09
 ],
 [
 "Door Recurring",
@@ -705,6 +699,15 @@ new Date(2013,9,1),
 ],
 [
 "Door Recurring",
+new Date(2013,10,1),
+2013,
+11,
+9737,
+18.43261477,
+179478.37
+],
+[
+"Door Recurring",
 new Date(2015,0,1),
 2015,
 1,
@@ -720,6 +723,15 @@ new Date(2014,1,1),
 9370,
 18.67224013,
 174958.89
+],
+[
+"Door Recurring",
+new Date(2015,3,1),
+2015,
+4,
+9263,
+19.71783008,
+182646.26
 ],
 [
 "Door Recurring",
@@ -759,6 +771,24 @@ new Date(2015,10,1),
 ],
 [
 "Door Recurring",
+new Date(2016,2,1),
+2016,
+3,
+8579,
+20.0481886,
+171993.41
+],
+[
+"Door Recurring",
+new Date(2014,10,1),
+2014,
+11,
+9285,
+19.42320517,
+180344.46
+],
+[
+"Door Recurring",
 new Date(2013,2,1),
 2013,
 3,
@@ -777,42 +807,6 @@ new Date(2013,3,1),
 ],
 [
 "Door Recurring",
-new Date(2013,7,1),
-2013,
-8,
-10264,
-18.00665822,
-184820.34
-],
-[
-"Door Recurring",
-new Date(2014,10,1),
-2014,
-11,
-9285,
-19.42320517,
-180344.46
-],
-[
-"Door Recurring",
-new Date(2013,10,1),
-2013,
-11,
-9737,
-18.43261477,
-179478.37
-],
-[
-"Door Recurring",
-new Date(2015,2,1),
-2015,
-3,
-9488,
-20.05045004,
-190238.67
-],
-[
-"Door Recurring",
 new Date(2015,8,1),
 2015,
 9,
@@ -822,21 +816,12 @@ new Date(2015,8,1),
 ],
 [
 "Door Recurring",
-new Date(2016,2,1),
-2016,
-3,
-8579,
-20.0481886,
-171993.41
-],
-[
-"Door Recurring",
-new Date(2016,4,1),
-2016,
-5,
-8270,
-19.94400363,
-164936.91
+new Date(2013,7,1),
+2013,
+8,
+10264,
+18.00665822,
+184820.34
 ],
 [
 "Door Recurring",
@@ -849,48 +834,39 @@ new Date(2014,5,1),
 ],
 [
 "Door Recurring",
-new Date(2016,3,1),
-2016,
-4,
-8339,
-19.97391294,
-166562.46
-],
-[
-"Door Recurring",
-new Date(2014,7,1),
-2014,
-8,
-9470,
-19.10663569,
-180939.84
-],
-[
-"Door Recurring",
-new Date(2013,5,1),
+new Date(2013,6,1),
 2013,
-6,
-10379,
-17.77368629,
-184473.09
+7,
+10493,
+17.55761079,
+184232.01
 ],
 [
 "Door Recurring",
-new Date(2015,3,1),
-2015,
-4,
-9263,
-19.71783008,
-182646.26
-],
-[
-"Door Recurring",
-new Date(2016,1,1),
+new Date(2016,5,1),
 2016,
-2,
-8518,
-20.30154496,
-172928.56
+6,
+8090,
+19.7993152,
+160176.46
+],
+[
+"Door Recurring",
+new Date(2014,8,1),
+2014,
+9,
+9508,
+19.13761464,
+181960.44
+],
+[
+"Door Recurring",
+new Date(2016,6,1),
+2016,
+7,
+7980,
+19.71189975,
+157300.96
 ],
 [
 "Door Recurring",
@@ -921,12 +897,21 @@ new Date(2014,0,1),
 ],
 [
 "Door Recurring",
-new Date(2016,5,1),
+new Date(2016,1,1),
 2016,
-6,
-8090,
-19.7993152,
-160176.46
+2,
+8518,
+20.30154496,
+172928.56
+],
+[
+"Door Recurring",
+new Date(2016,3,1),
+2016,
+4,
+8339,
+19.97391294,
+166562.46
 ],
 [
 "Door Recurring",
@@ -948,12 +933,21 @@ new Date(2013,1,1),
 ],
 [
 "Door Recurring",
-new Date(2013,6,1),
-2013,
-7,
-10493,
-17.55761079,
-184232.01
+new Date(2016,4,1),
+2016,
+5,
+8270,
+19.94400363,
+164936.91
+],
+[
+"Door Recurring",
+new Date(2015,2,1),
+2015,
+3,
+9488,
+20.05045004,
+190238.67
 ],
 [
 "Door Recurring",
@@ -966,21 +960,12 @@ new Date(2013,0,1),
 ],
 [
 "Door Recurring",
-new Date(2014,8,1),
+new Date(2014,7,1),
 2014,
-9,
-9508,
-19.13761464,
-181960.44
-],
-[
-"Door Recurring",
-new Date(2015,6,1),
-2015,
-7,
-9234,
-20.01499459,
-184818.46
+8,
+9470,
+19.10663569,
+180939.84
 ],
 [
 "Door Recurring",
@@ -999,6 +984,15 @@ new Date(2015,5,1),
 9304,
 19.9901666,
 185988.51
+],
+[
+"Door Recurring",
+new Date(2015,6,1),
+2015,
+7,
+9234,
+20.01499459,
+184818.46
 ],
 [
 "Door Recurring",
@@ -1092,12 +1086,12 @@ new Date(2013,9,1),
 ],
 [
 "Street Recurring",
-new Date(2014,6,1),
+new Date(2014,8,1),
 2014,
-7,
-13750,
-14.92412655,
-205206.74
+9,
+13334,
+14.97451327,
+199670.16
 ],
 [
 "Street Recurring",
@@ -1137,39 +1131,12 @@ new Date(2013,8,1),
 ],
 [
 "Street Recurring",
-new Date(2015,2,1),
-2015,
-3,
-12516,
-15.16650607,
-189823.99
-],
-[
-"Street Recurring",
-new Date(2016,5,1),
+new Date(2016,4,1),
 2016,
-6,
-10193,
-14.69717159,
-149808.27
-],
-[
-"Street Recurring",
-new Date(2016,7,1),
-2016,
-8,
-9937,
-14.52639227,
-144348.76
-],
-[
-"Street Recurring",
-new Date(2013,6,1),
-2013,
-7,
-15920,
-14.55949372,
-231787.14
+5,
+10566,
+14.87437157,
+157162.61
 ],
 [
 "Street Recurring",
@@ -1182,12 +1149,21 @@ new Date(2013,7,1),
 ],
 [
 "Street Recurring",
-new Date(2014,8,1),
-2014,
-9,
-13334,
-14.97451327,
-199670.16
+new Date(2013,6,1),
+2013,
+7,
+15920,
+14.55949372,
+231787.14
+],
+[
+"Street Recurring",
+new Date(2015,2,1),
+2015,
+3,
+12516,
+15.16650607,
+189823.99
 ],
 [
 "Street Recurring",
@@ -1236,21 +1212,30 @@ new Date(2016,3,1),
 ],
 [
 "Street Recurring",
-new Date(2013,11,1),
-2013,
-12,
-14899,
-14.97964964,
-223181.8
+new Date(2016,5,1),
+2016,
+6,
+10193,
+14.69717159,
+149808.27
 ],
 [
 "Street Recurring",
-new Date(2016,4,1),
+new Date(2016,6,1),
 2016,
-5,
-10566,
-14.87437157,
-157162.61
+7,
+10016,
+14.69560503,
+147191.18
+],
+[
+"Street Recurring",
+new Date(2014,7,1),
+2014,
+8,
+13508,
+15.10049674,
+203977.51
 ],
 [
 "Street Recurring",
@@ -1260,15 +1245,6 @@ new Date(2016,2,1),
 10437,
 14.63984957,
 152796.11
-],
-[
-"Street Recurring",
-new Date(2015,5,1),
-2015,
-6,
-11932,
-14.76556235,
-176182.69
 ],
 [
 "Street Recurring",
@@ -1290,39 +1266,12 @@ new Date(2013,4,1),
 ],
 [
 "Street Recurring",
-new Date(2014,7,1),
+new Date(2014,6,1),
 2014,
-8,
-13508,
-15.10049674,
-203977.51
-],
-[
-"Street Recurring",
-new Date(2015,7,1),
-2015,
-8,
-11439,
-14.60782761,
-167098.94
-],
-[
-"Street Recurring",
-new Date(2016,1,1),
-2016,
-2,
-10240,
-14.87789941,
-152349.69
-],
-[
-"Street Recurring",
-new Date(2015,11,1),
-2015,
-12,
-10462,
-14.52974861,
-152010.23
+7,
+13750,
+14.92412655,
+205206.74
 ],
 [
 "Street Recurring",
@@ -1335,21 +1284,66 @@ new Date(2016,0,1),
 ],
 [
 "Street Recurring",
-new Date(2014,11,1),
-2014,
-12,
-12576,
-14.96609256,
-188213.58
-],
-[
-"Street Recurring",
 new Date(2014,9,1),
 2014,
 10,
 13100,
 15.15006336,
 198465.83
+],
+[
+"Street Recurring",
+new Date(2013,11,1),
+2013,
+12,
+14899,
+14.97964964,
+223181.8
+],
+[
+"Street Recurring",
+new Date(2016,7,1),
+2016,
+8,
+9937,
+14.52639227,
+144348.76
+],
+[
+"Street Recurring",
+new Date(2015,11,1),
+2015,
+12,
+10462,
+14.52974861,
+152010.23
+],
+[
+"Street Recurring",
+new Date(2015,7,1),
+2015,
+8,
+11439,
+14.60782761,
+167098.94
+],
+[
+"Street Recurring",
+new Date(2015,5,1),
+2015,
+6,
+11932,
+14.76556235,
+176182.69
+],
+[
+"Street Recurring",
+new Date(2016,1,1),
+2016,
+2,
+10240,
+14.87789941,
+152349.69
 ],
 [
 "Street Recurring",
@@ -1362,12 +1356,30 @@ new Date(2016,8,1),
 ],
 [
 "Street Recurring",
-new Date(2016,6,1),
-2016,
-7,
-10016,
-14.69560503,
-147191.18
+new Date(2014,11,1),
+2014,
+12,
+12576,
+14.96609256,
+188213.58
+],
+[
+"Street Recurring",
+new Date(2015,4,1),
+2015,
+5,
+11824,
+15.00732493,
+177446.61
+],
+[
+"Street Recurring",
+new Date(2014,2,1),
+2014,
+3,
+14565,
+15.40297013,
+224344.26
 ],
 [
 "Street Recurring",
@@ -1389,30 +1401,12 @@ new Date(2014,5,1),
 ],
 [
 "Street Recurring",
-new Date(2014,2,1),
-2014,
-3,
-14565,
-15.40297013,
-224344.26
-],
-[
-"Street Recurring",
 new Date(2015,1,1),
 2015,
 2,
 12414,
 15.33062752,
 190314.41
-],
-[
-"Street Recurring",
-new Date(2015,4,1),
-2015,
-5,
-11824,
-15.00732493,
-177446.61
 ],
 [
 "Telefundraising Recurring",
@@ -1470,30 +1464,12 @@ new Date(2013,2,1),
 ],
 [
 "Telefundraising Recurring",
-new Date(2014,5,1),
-2014,
-6,
-4238,
-24.86778433,
-105389.67
-],
-[
-"Telefundraising Recurring",
 new Date(2016,0,1),
 2016,
 1,
 4914,
 27.2610582,
 133960.84
-],
-[
-"Telefundraising Recurring",
-new Date(2015,7,1),
-2015,
-8,
-4984,
-27.25799358,
-135853.84
 ],
 [
 "Telefundraising Recurring",
@@ -1515,6 +1491,24 @@ new Date(2016,2,1),
 ],
 [
 "Telefundraising Recurring",
+new Date(2016,3,1),
+2016,
+4,
+4692,
+27.00060529,
+126686.84
+],
+[
+"Telefundraising Recurring",
+new Date(2014,7,1),
+2014,
+8,
+4366,
+25.35982822,
+110721.01
+],
+[
+"Telefundraising Recurring",
 new Date(2016,4,1),
 2016,
 5,
@@ -1524,39 +1518,21 @@ new Date(2016,4,1),
 ],
 [
 "Telefundraising Recurring",
-new Date(2013,6,1),
-2013,
-7,
-3906,
-23.69608807,
-92556.92
-],
-[
-"Telefundraising Recurring",
-new Date(2016,5,1),
-2016,
-6,
-4626,
-26.93289883,
-124591.59
-],
-[
-"Telefundraising Recurring",
-new Date(2016,6,1),
-2016,
-7,
-4733,
-27.10581872,
-128291.84
-],
-[
-"Telefundraising Recurring",
 new Date(2016,7,1),
 2016,
 8,
 4820,
 27.17989419,
 131007.09
+],
+[
+"Telefundraising Recurring",
+new Date(2014,9,1),
+2014,
+10,
+4702,
+25.73777329,
+121019.01
 ],
 [
 "Telefundraising Recurring",
@@ -1605,6 +1581,15 @@ new Date(2015,5,1),
 ],
 [
 "Telefundraising Recurring",
+new Date(2013,5,1),
+2013,
+6,
+3703,
+23.13655685,
+85674.67
+],
+[
+"Telefundraising Recurring",
 new Date(2013,9,1),
 2013,
 10,
@@ -1623,6 +1608,24 @@ new Date(2014,1,1),
 ],
 [
 "Telefundraising Recurring",
+new Date(2014,5,1),
+2014,
+6,
+4238,
+24.86778433,
+105389.67
+],
+[
+"Telefundraising Recurring",
+new Date(2015,7,1),
+2015,
+8,
+4984,
+27.25799358,
+135853.84
+],
+[
+"Telefundraising Recurring",
 new Date(2015,8,1),
 2015,
 9,
@@ -1632,48 +1635,39 @@ new Date(2015,8,1),
 ],
 [
 "Telefundraising Recurring",
-new Date(2013,4,1),
+new Date(2013,6,1),
 2013,
-5,
-3550,
-22.83652676,
-81069.67
+7,
+3906,
+23.69608807,
+92556.92
 ],
 [
 "Telefundraising Recurring",
-new Date(2016,3,1),
+new Date(2014,8,1),
+2014,
+9,
+4492,
+25.95464381,
+116588.26
+],
+[
+"Telefundraising Recurring",
+new Date(2016,5,1),
 2016,
-4,
-4692,
-27.00060529,
-126686.84
-],
-[
-"Telefundraising Recurring",
-new Date(2014,7,1),
-2014,
-8,
-4366,
-25.35982822,
-110721.01
-],
-[
-"Telefundraising Recurring",
-new Date(2013,5,1),
-2013,
 6,
-3703,
-23.13655685,
-85674.67
+4626,
+26.93289883,
+124591.59
 ],
 [
 "Telefundraising Recurring",
-new Date(2014,9,1),
-2014,
-10,
-4702,
-25.73777329,
-121019.01
+new Date(2016,6,1),
+2016,
+7,
+4733,
+27.10581872,
+128291.84
 ],
 [
 "Telefundraising Recurring",
@@ -1683,6 +1677,24 @@ new Date(2014,11,1),
 4763,
 25.91875079,
 123451.01
+],
+[
+"Telefundraising Recurring",
+new Date(2015,9,1),
+2015,
+10,
+5081,
+27.51896083,
+139823.84
+],
+[
+"Telefundraising Recurring",
+new Date(2013,7,1),
+2013,
+8,
+3915,
+24.07398978,
+94249.67
 ],
 [
 "Telefundraising Recurring",
@@ -1713,21 +1725,12 @@ new Date(2015,4,1),
 ],
 [
 "Telefundraising Recurring",
-new Date(2013,7,1),
-2013,
-8,
-3915,
-24.07398978,
-94249.67
-],
-[
-"Telefundraising Recurring",
-new Date(2015,9,1),
-2015,
-10,
-5081,
-27.51896083,
-139823.84
+new Date(2014,0,1),
+2014,
+1,
+3861,
+24.15932919,
+93279.17
 ],
 [
 "Telefundraising Recurring",
@@ -1737,24 +1740,6 @@ new Date(2013,0,1),
 3203,
 21.47265688,
 68776.92
-],
-[
-"Telefundraising Recurring",
-new Date(2015,11,1),
-2015,
-12,
-4923,
-27.16414585,
-133729.09
-],
-[
-"Telefundraising Recurring",
-new Date(2014,0,1),
-2014,
-1,
-3861,
-24.15932919,
-93279.17
 ],
 [
 "Telefundraising Recurring",
@@ -1785,12 +1770,21 @@ new Date(2016,8,1),
 ],
 [
 "Telefundraising Recurring",
-new Date(2014,8,1),
-2014,
-9,
-4492,
-25.95464381,
-116588.26
+new Date(2015,11,1),
+2015,
+12,
+4923,
+27.16414585,
+133729.09
+],
+[
+"Telefundraising Recurring",
+new Date(2015,6,1),
+2015,
+7,
+5001,
+27.14117377,
+135733.01
 ],
 [
 "Telefundraising Recurring",
@@ -1803,21 +1797,21 @@ new Date(2013,10,1),
 ],
 [
 "Telefundraising Recurring",
+new Date(2013,4,1),
+2013,
+5,
+3550,
+22.83652676,
+81069.67
+],
+[
+"Telefundraising Recurring",
 new Date(2015,3,1),
 2015,
 4,
 4690,
 26.38838166,
 123761.51
-],
-[
-"Telefundraising Recurring",
-new Date(2015,6,1),
-2015,
-7,
-5001,
-27.14117377,
-135733.01
 ] 
 ];
 data.addColumn('string','GROUP');
@@ -1832,15 +1826,15 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartMotionChartID20ec54876a07() {
-var data = gvisDataMotionChartID20ec54876a07();
+function drawChartMotionChartID20ec1063125() {
+var data = gvisDataMotionChartID20ec1063125();
 var options = {};
 options["width"] = 400;
 options["height"] = 300;
 options["state"] = "\n{\"xAxisOption\":\"4\",\"yAxisOption\":\"5\",\"dimensions\":{\"iconDimensions\":[\"dim0\"]}}\n";
 
     var chart = new google.visualization.MotionChart(
-    document.getElementById('MotionChartID20ec54876a07')
+    document.getElementById('MotionChartID20ec1063125')
     );
     chart.draw(data,options);
     
@@ -1864,9 +1858,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartMotionChartID20ec54876a07);
+callbacks.push(drawChartMotionChartID20ec1063125);
 })();
-function displayChartMotionChartID20ec54876a07() {
+function displayChartMotionChartID20ec1063125() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -1892,273 +1886,21 @@ callbacks.shift()();
 
 <!-- jsChart -->  
 
-<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartMotionChartID20ec54876a07"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartMotionChartID20ec1063125"></script>
  
 
 <!-- divChart -->
 
-<div id="MotionChartID20ec54876a07" 
+<div id="MotionChartID20ec1063125" 
   style="width: 400; height: 300;">
 </div>
 
-      <div id='aceeditor19' style="height:px;"></div>
-      <div class='interactive btn-toolbar pull-left'>
-        <div class='btn-group'>
-          <a class='btn btn-small action-button' id='runCode19' data-action='runCode'
-            data-cell='19' rel='tooltip' data-title='Run Code'>
-            <i class='icon-play'></i>
-          </a>
-          <a class='btn btn-small iBtn' id='testCode19' data-action='testCode'
-             data-cell='19' rel='tooltip' data-title='Test Code'>
-            <i class='icon-check'></i>
-          </a>
-          <a class='btn btn-small iBtn' id='clearResult19' data-action='clearResult'
-             data-cell='19' rel='tooltip' data-title='Clear Output'>
-            <i class="icon-remove"></i>
-          </a>
-          <a class='btn  btn-small iBtn' id='getHint19' rel='tooltip' 
-            data-title="Get Hint" data-action='getHint'
-            data-cell='19' data-hint="">
-            <i class="icon-bookmark"></i>
-          </a>
-        </div>
-      </div>    </form>
-  </div>
-  <div class='span7'>
-    <iframe id="knitResult19" class='shiny-html-output'></iframe>
-  </div>
 </div>
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-20" style="background:;">
-  <hgroup>
-    <h2>Interactive Console</h2>
-  </hgroup>
-  <article data-timings="">
-     
-<div class='row-fluid'>
-  <div class='span5'>
-    <form id="knitForm20" data-cell="20">
-      <pre><code class="r">require(googleVis)
-M1 &lt;- gvisMotionChart(Fruits, idvar = &#39;Fruit&#39;, timevar = &#39;Year&#39;)
-print(M1, tag = &#39;chart&#39;)
-</code></pre>
-
-<pre><code>## &lt;!-- MotionChart generated in R 3.3.1 by googleVis 0.6.1 package --&gt;
-## &lt;!-- Fri Nov 18 23:38:07 2016 --&gt;
-## 
-## 
-## &lt;!-- jsHeader --&gt;
-## &lt;script type=&quot;text/javascript&quot;&gt;
-##  
-## // jsData 
-## function gvisDataMotionChartID20ec64f441cb () {
-## var data = new google.visualization.DataTable();
-## var datajson =
-## [
-##  [
-## &quot;Apples&quot;,
-## 2008,
-## &quot;West&quot;,
-## 98,
-## 78,
-## 20,
-## &quot;2008-12-31&quot;
-## ],
-## [
-## &quot;Apples&quot;,
-## 2009,
-## &quot;West&quot;,
-## 111,
-## 79,
-## 32,
-## &quot;2009-12-31&quot;
-## ],
-## [
-## &quot;Apples&quot;,
-## 2010,
-## &quot;West&quot;,
-## 89,
-## 76,
-## 13,
-## &quot;2010-12-31&quot;
-## ],
-## [
-## &quot;Oranges&quot;,
-## 2008,
-## &quot;East&quot;,
-## 96,
-## 81,
-## 15,
-## &quot;2008-12-31&quot;
-## ],
-## [
-## &quot;Bananas&quot;,
-## 2008,
-## &quot;East&quot;,
-## 85,
-## 76,
-## 9,
-## &quot;2008-12-31&quot;
-## ],
-## [
-## &quot;Oranges&quot;,
-## 2009,
-## &quot;East&quot;,
-## 93,
-## 80,
-## 13,
-## &quot;2009-12-31&quot;
-## ],
-## [
-## &quot;Bananas&quot;,
-## 2009,
-## &quot;East&quot;,
-## 94,
-## 78,
-## 16,
-## &quot;2009-12-31&quot;
-## ],
-## [
-## &quot;Oranges&quot;,
-## 2010,
-## &quot;East&quot;,
-## 98,
-## 91,
-## 7,
-## &quot;2010-12-31&quot;
-## ],
-## [
-## &quot;Bananas&quot;,
-## 2010,
-## &quot;East&quot;,
-## 81,
-## 71,
-## 10,
-## &quot;2010-12-31&quot;
-## ] 
-## ];
-## data.addColumn(&#39;string&#39;,&#39;Fruit&#39;);
-## data.addColumn(&#39;number&#39;,&#39;Year&#39;);
-## data.addColumn(&#39;string&#39;,&#39;Location&#39;);
-## data.addColumn(&#39;number&#39;,&#39;Sales&#39;);
-## data.addColumn(&#39;number&#39;,&#39;Expenses&#39;);
-## data.addColumn(&#39;number&#39;,&#39;Profit&#39;);
-## data.addColumn(&#39;string&#39;,&#39;Date&#39;);
-## data.addRows(datajson);
-## return(data);
-## }
-##  
-## // jsDrawChart
-## function drawChartMotionChartID20ec64f441cb() {
-## var data = gvisDataMotionChartID20ec64f441cb();
-## var options = {};
-## options[&quot;width&quot;] = 600;
-## options[&quot;height&quot;] = 500;
-## options[&quot;state&quot;] = &quot;&quot;;
-## 
-## 
-##     var chart = new google.visualization.MotionChart(
-##     document.getElementById(&#39;MotionChartID20ec64f441cb&#39;)
-##     );
-##     chart.draw(data,options);
-##     
-## 
-## }
-##   
-##  
-## // jsDisplayChart
-## (function() {
-## var pkgs = window.__gvisPackages = window.__gvisPackages || [];
-## var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
-## var chartid = &quot;motionchart&quot;;
-##   
-## // Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
-## var i, newPackage = true;
-## for (i = 0; newPackage &amp;&amp; i &lt; pkgs.length; i++) {
-## if (pkgs[i] === chartid)
-## newPackage = false;
-## }
-## if (newPackage)
-##   pkgs.push(chartid);
-##   
-## // Add the drawChart function to the global list of callbacks
-## callbacks.push(drawChartMotionChartID20ec64f441cb);
-## })();
-## function displayChartMotionChartID20ec64f441cb() {
-##   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
-##   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
-##   window.clearTimeout(window.__gvisLoad);
-##   // The timeout is set to 100 because otherwise the container div we are
-##   // targeting might not be part of the document yet
-##   window.__gvisLoad = setTimeout(function() {
-##   var pkgCount = pkgs.length;
-##   google.load(&quot;visualization&quot;, &quot;1&quot;, { packages:pkgs, callback: function() {
-##   if (pkgCount != pkgs.length) {
-##   // Race condition where another setTimeout call snuck in after us; if
-##   // that call added a package, we must not shift its callback
-##   return;
-## }
-## while (callbacks.length &gt; 0)
-## callbacks.shift()();
-## } });
-## }, 100);
-## }
-##  
-## // jsFooter
-## &lt;/script&gt;
-##  
-## &lt;!-- jsChart --&gt;  
-## &lt;script type=&quot;text/javascript&quot; src=&quot;https://www.google.com/jsapi?callback=displayChartMotionChartID20ec64f441cb&quot;&gt;&lt;/script&gt;
-##  
-## &lt;!-- divChart --&gt;
-##   
-## &lt;div id=&quot;MotionChartID20ec64f441cb&quot; 
-##   style=&quot;width: 600; height: 500;&quot;&gt;
-## &lt;/div&gt;
-</code></pre>
-
-<!--
-
-associate with javascript
-
-
--->
-
-      <div id='aceeditor20' style="height:px;"></div>
-      <div class='interactive btn-toolbar pull-left'>
-        <div class='btn-group'>
-          <a class='btn btn-small action-button' id='runCode20' data-action='runCode'
-            data-cell='20' rel='tooltip' data-title='Run Code'>
-            <i class='icon-play'></i>
-          </a>
-          <a class='btn btn-small iBtn' id='testCode20' data-action='testCode'
-             data-cell='20' rel='tooltip' data-title='Test Code'>
-            <i class='icon-check'></i>
-          </a>
-          <a class='btn btn-small iBtn' id='clearResult20' data-action='clearResult'
-             data-cell='20' rel='tooltip' data-title='Clear Output'>
-            <i class="icon-remove"></i>
-          </a>
-          <a class='btn  btn-small iBtn' id='getHint20' rel='tooltip' 
-            data-title="Get Hint" data-action='getHint'
-            data-cell='20' data-hint="">
-            <i class="icon-bookmark"></i>
-          </a>
-        </div>
-      </div>    </form>
-  </div>
-  <div class='span7'>
-    <iframe id="knitResult20" class='shiny-html-output'></iframe>
-  </div>
-</div>
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="dark" id="slide-21" style="background:;">
+<slide class="dark" id="slide-20" style="background:;">
   <article data-timings="">
     <p style='font-size:100px'>
 <font color='white'>
@@ -2170,7 +1912,7 @@ R shiny dashboard
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-22" style="background:;">
+<slide class="" id="slide-21" style="background:;">
   <hgroup>
     <h2>Integrate R output with dashboard</h2>
   </hgroup>
@@ -2196,7 +1938,7 @@ R shiny dashboard
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-23" style="background:;">
+<slide class="" id="slide-22" style="background:;">
   <hgroup>
     <h2>Realtion between ui.R and server.R</h2>
   </hgroup>
@@ -2210,7 +1952,7 @@ R shiny dashboard
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-24" style="background:;">
+<slide class="" id="slide-23" style="background:;">
   <hgroup>
     <h2>Shiny application demo</h2>
   </hgroup>
@@ -2233,7 +1975,7 @@ R shiny dashboard
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-25" style="background:;">
+<slide class="" id="slide-24" style="background:;">
   <hgroup>
     <h2>Publish/deploy dashboard online</h2>
   </hgroup>
@@ -2243,7 +1985,7 @@ R shiny dashboard
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="dark" id="slide-26" style="background:;">
+<slide class="dark" id="slide-25" style="background:;">
   <article data-timings="">
     <p style='font-size:100px'>
 <font color='white'>
@@ -2255,7 +1997,7 @@ Write document in R
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-27" style="background:;">
+<slide class="" id="slide-26" style="background:;">
   <hgroup>
     <h2>Knitr in R</h2>
   </hgroup>
@@ -2265,7 +2007,7 @@ Write document in R
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-28" style="background:;">
+<slide class="" id="slide-27" style="background:;">
   <hgroup>
     <h2>Presentation in R slidify</h2>
   </hgroup>
@@ -2275,7 +2017,7 @@ Write document in R
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-29" style="background:;">
+<slide class="" id="slide-28" style="background:;">
   <article data-timings="">
     
   </article>
@@ -2402,62 +2144,56 @@ Write document in R
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=20 title='Interactive Console'>
+        data-slide=20 title='NA'>
          20
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=21 title='NA'>
+        data-slide=21 title='Integrate R output with dashboard'>
          21
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=22 title='Integrate R output with dashboard'>
+        data-slide=22 title='Realtion between ui.R and server.R'>
          22
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=23 title='Realtion between ui.R and server.R'>
+        data-slide=23 title='Shiny application demo'>
          23
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=24 title='Shiny application demo'>
+        data-slide=24 title='Publish/deploy dashboard online'>
          24
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=25 title='Publish/deploy dashboard online'>
+        data-slide=25 title='NA'>
          25
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=26 title='NA'>
+        data-slide=26 title='Knitr in R'>
          26
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=27 title='Knitr in R'>
+        data-slide=27 title='Presentation in R slidify'>
          27
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=28 title='Presentation in R slidify'>
+        data-slide=28 title='NA'>
          28
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=29 title='NA'>
-         29
       </a>
     </li>
   </ul>

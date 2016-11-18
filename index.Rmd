@@ -276,7 +276,7 @@ Shapefile and raster data can be imported into R
 *** =left
 ```{r, warning=FALSE, message=FALSE, comment=NA, eval=FALSE, tidy=TRUE}
 library(rgdal)
-london.shp <- readOGR(dsn = "F:\\Work\\Greenpeace\\R Skillshare\\Data\\ESRI",
+london.shp <- readOGR(dsn = "F:\\Work\\Greenpeace\\R Skillshare\\Data\\London",
                       layer = "London_Borough_Excluding_MHW")
 plot(london.shp)
 
@@ -287,9 +287,8 @@ plot(london.shp)
 ```{r, fig.width=5, fig.height=5, echo=FALSE, results='hide', warning=FALSE}
 # code will not show up in this part but will give the result
 library(rgdal)
-london.shp <- readOGR(dsn = "X:\\Box Sync\\Fundraising\\Analysis\\Martin\\Bangkok_Skillshare\\Data\\ESRI",
+london.shp <- readOGR(dsn = "F:\\Work\\Greenpeace\\R Skillshare\\Data\\London",
                       layer = "London_Borough_Excluding_MHW")
-class(london.shp)
 plot(london.shp)
 ```
 
@@ -486,13 +485,12 @@ This text is red
 
 -->
 
---- &interactive
+--- &twocol
 
 ## Interactive plot
 
-
-
-```{r motionchartcode1, results='asis', warning=FALSE, message=FALSE, opts.label='interactive'}
+*** =left
+```{r motionchartcode1, results='asis', warning=FALSE, message=FALSE, opts.label='interactive', eval=FALSE}
 library(googleVis)
 #options(gvis.plot.tag='chart')
 gmotion <- gvisMotionChart(gift.ag,
@@ -505,23 +503,22 @@ gmotion <- gvisMotionChart(gift.ag,
 print(gmotion, tag = 'chart')
 ```
 
---- &interactive
-## Interactive Console
+*** =right
 
-```{r opts.label = 'interactive'}
-require(googleVis)
-M1 <- gvisMotionChart(Fruits, idvar = 'Fruit', timevar = 'Year')
-print(M1, tag = 'chart')
+```{r results='asis', warning=FALSE, echo=FALSE, message=FALSE, opts.label='interactive'}
+library(googleVis)
+#options(gvis.plot.tag='chart')
+gmotion <- gvisMotionChart(gift.ag,
+                           idvar = "GROUP",
+                           timevar = "date",
+                           xvar = "Count",
+                           yvar = "Average",
+                           options = list(width=400, height=300))
+#print(gmotion$html$chart)
+print(gmotion, tag = 'chart')
 ```
 
 
-
-<!--
-
-associate with javascript
-
-
--->
 
 --- .dark
 
