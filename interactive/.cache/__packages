@@ -1,0 +1,6 @@
+base
+slidify
+RODBC
+data.table
+ggplot2
+googleVis

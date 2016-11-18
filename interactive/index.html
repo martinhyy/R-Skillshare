@@ -13,7 +13,8 @@
     media="only screen and (max-device-width: 480px)" >
   <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
   <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
-  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/interactive/css/aceeditor.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
 
   
   <!-- Grab CDN jQuery, fall back to local if offline -->
@@ -66,6 +67,51 @@
   <!-- Presenter Notes -->
 </slide>
 
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Interactive Console</h2>
+  </hgroup>
+  <article data-timings="">
+     
+<div class='row-fluid'>
+  <div class='span5'>
+    <form id="knitForm3" data-cell="3">
+      <pre><code class="r">require(googleVis)
+M1 &lt;- gvisMotionChart(Fruits, idvar = &#39;Fruit&#39;, timevar = &#39;Year&#39;)
+plot(M1)
+</code></pre>
+
+      <div id='aceeditor3' style="height:px;"></div>
+      <div class='interactive btn-toolbar pull-left'>
+        <div class='btn-group'>
+          <a class='btn btn-small action-button' id='runCode3' data-action='runCode'
+            data-cell='3' rel='tooltip' data-title='Run Code'>
+            <i class='icon-play'></i>
+          </a>
+          <a class='btn btn-small iBtn' id='testCode3' data-action='testCode'
+             data-cell='3' rel='tooltip' data-title='Test Code'>
+            <i class='icon-check'></i>
+          </a>
+          <a class='btn btn-small iBtn' id='clearResult3' data-action='clearResult'
+             data-cell='3' rel='tooltip' data-title='Clear Output'>
+            <i class="icon-remove"></i>
+          </a>
+          <a class='btn  btn-small iBtn' id='getHint3' rel='tooltip' 
+            data-title="Get Hint" data-action='getHint'
+            data-cell='3' data-hint="">
+            <i class="icon-bookmark"></i>
+          </a>
+        </div>
+      </div>    </form>
+  </div>
+  <div class='span7'>
+    <iframe id="knitResult3" class='shiny-html-output'></iframe>
+  </div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
     <slide class="backdrop"></slide>
   </slides>
   <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
@@ -82,6 +128,12 @@
          2
       </a>
     </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Interactive Console'>
+         3
+      </a>
+    </li>
   </ul>
   </div>  <!--[if IE]>
     <script 
@@ -91,7 +143,10 @@
   <![endif]-->
 </body>
   <!-- Load Javascripts for Widgets -->
-  
+  <script src="libraries/widgets/interactive/js/ace/js/ace.js"></script>
+<script src="libraries/widgets/interactive/js/opencpu-0.5.js"></script>
+<script src="libraries/widgets/interactive/js/interactive.js"></script>
+
   <!-- LOAD HIGHLIGHTER JS FILES -->
   <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
