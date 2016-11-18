@@ -19,11 +19,11 @@ hitheme: tomorrow
 highlighter : highlight.js
 subtitle: R Programming Demo
 framework: io2012
-widgets: []
+widgets: [shiny, interactive]
 github      :
   user      : martinhyy
-  repo      : R-Skillshare
----
+  repo      : Insight_Skillshare
+--- 
 
 
 
@@ -63,11 +63,11 @@ When you click the **Knit** button a document will be generated that includes bo
 <br> </br>
 > - # R is a programming language for statistical computing
 
-> - # khskshdkfjh
+> - # Created by Ross Ihaka and Robert Gentleman
 
-> - # kdfhkhdfkhsd
+> - # R is named after the first names of the first two R authors
 
-> - # skdfkhsfkh
+> - # The R project was first commenced in 1992, with an initial version released in 1995 and a stable beta version in 2000 
 
 ---
 
@@ -88,9 +88,26 @@ When you click the **Knit** button a document will be generated that includes bo
 
 > - # Markdown Documentation
 
----
+--- &twocol
 
 ## Some stats about R
+
+# R is becoming popular.
+<br>
+IEEE Spectrum (Institude of Electrical and Electronics Engineers) ranked R fifth in the <a href="http://spectrum.ieee.org/computing/software/the-2016-top-programming-languages">top programming languages of 2016</a>
+
+*** =left
+<figure>
+<img src="http://spectrum.ieee.org/image/Mjc5MjI0Ng.png" title="2016 Ranking" width="95%" height="95%">
+<!--<figcaption>2016 Ranking</figcaption>-->
+</figure>
+
+*** =right
+<figure>
+<img src="http://spectrum.ieee.org/img/top-tech-620px-1436797486093.jpg" title="2014 and 2015 Comparison" width="95%" height="95%">
+<!--<figcaption>2014 2015 ranking comparison</figcaption>-->
+</figure>
+
 <!--
 
 - Bullet 1
@@ -99,13 +116,7 @@ When you click the **Knit** button a document will be generated that includes bo
 
 -->
 
----
 
-## Something in between
-
-```{r}
-summary(cars)
-```
 
 --- .dark .nobackground
 
@@ -198,7 +209,7 @@ library(RODBC)
 RE_connect <- odbcConnect("RE7", uid = "SSRS", pwd = "xH^SfWJ2R4")
 gift <- sqlQuery(RE_connect, 
                query = "
-               select RECORDS.CONSTITUENT_ID, ...Truncated
+               select RECORDS.CONSTITUENT_ID, ... from GiftSplit ...Truncated
                where GIFT.DTE between '2016-09-01' and '2016-09-30'
                and GIFT.TYPE in (31) and (FUND.FUND_ID like '%AQ-PHONE%' or FUND.FUND_ID like '%AQ-DDC%')
                ")
@@ -338,7 +349,7 @@ However `aggregate()` is not really efficient when dataset gets larger and aggre
 *** =left
 
 ```{r, echo=FALSE}
-
+library(data.table)
 gift$DTE <- as.Date(gift$DTE)
 
 gift$Year <- year(gift$DTE)
@@ -381,7 +392,7 @@ dplyr() pipe operator easy to learn but consumes memory
 
 Using external packages like `library(data.table)` can really solve the efficiency problem.
 
-When dealing with large data aggregation, it can shrink the time significantly.
+When dealing with large data aggregation, it can shrink the time significantly (Why?).
 
 Other packages like `dplyr`, `reshape2` can also help aggregate data for different purposes
 
@@ -470,31 +481,32 @@ This text is red
 
 -->
 
---- &twocol
+--- &interactive
 
 ## Interactive plot
 
 
 
-```{r motionchartcode1, results='asis', message=FALSE, warning=FALSE}
+```{r motionchartcode1, results='asis', warning=FALSE, message=FALSE, opts.label='interactive'}
 library(googleVis)
-options(gvis.plot.tag='chart')
-M1 <- gvisMotionChart(Fruits, idvar = "Fruit", timevar = "Year")
-show(M1$html$chart)
-#gmotion
+#options(gvis.plot.tag='chart')
+gmotion <- gvisMotionChart(gift.ag,
+                           idvar = "GROUP",
+                           timevar = "date",
+                           xvar = "Count",
+                           yvar = "Average",
+                           options = list(width=400, height=300))
+#print(gmotion$html$chart)
+print(gmotion, tag = 'chart')
 ```
 
----
+--- &interactive
+## Interactive Console
 
-## Motion chart example
-
-```{r motionchartcode, results='asis'}
-library(googleVis)
-options(gvis.plot.tag='chart')
-Pie <- gvisPieChart(CityPopularity,
-                    options=list(width=400, height=200))
-print(Pie, tag = 'chart')
-
+```{r opts.label = 'interactive'}
+require(googleVis)
+M1 <- gvisMotionChart(Fruits, idvar = 'Fruit', timevar = 'Year')
+print(M1, tag = 'chart')
 ```
 
 

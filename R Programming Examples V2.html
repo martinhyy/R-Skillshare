@@ -13,7 +13,8 @@
     media="only screen and (max-device-width: 480px)" >
   <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
   <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
-  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/interactive/css/aceeditor.css"></link>
+
   
   <!-- Grab CDN jQuery, fall back to local if offline -->
   <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
@@ -90,9 +91,9 @@ When you click the **Knit** button a document will be generated that includes bo
 
 <ul class = "build incremental">
 <li><h1>R is a programming language for statistical computing</h1></li>
-<li><h1>khskshdkfjh</h1></li>
-<li><h1>kdfhkhdfkhsd</h1></li>
-<li><h1>skdfkhsfkh</h1></li>
+<li><h1>Created by Ross Ihaka and Robert Gentleman</h1></li>
+<li><h1>R is named after the first names of the first two R authors</h1></li>
+<li><h1>The R project was first commenced in 1992, with an initial version released in 1995 and a stable beta version in 2000</h1></li>
 </ul>
 
   </article>
@@ -125,7 +126,25 @@ When you click the **Knit** button a document will be generated that includes bo
     <h2>Some stats about R</h2>
   </hgroup>
   <article data-timings="">
-    <!--
+    <h1>R is becoming popular.</h1>
+
+<p><br>
+IEEE Spectrum (Institude of Electrical and Electronics Engineers) ranked R fifth in the <a href="http://spectrum.ieee.org/computing/software/the-2016-top-programming-languages">top programming languages of 2016</a></p>
+
+<div style='float:left;width:48%;' class='centered'>
+  <figure>
+<img src="http://spectrum.ieee.org/image/Mjc5MjI0Ng.png" title="2016 Ranking" width="95%" height="95%">
+<!--<figcaption>2016 Ranking</figcaption>-->
+</figure>
+
+</div>
+<div style='float:right;width:48%;'>
+  <figure>
+<img src="http://spectrum.ieee.org/img/top-tech-620px-1436797486093.jpg" title="2014 and 2015 Comparison" width="95%" height="95%">
+<!--<figcaption>2014 2015 ranking comparison</figcaption>-->
+</figure>
+
+<!--
 
 - Bullet 1
 - Bullet 2
@@ -133,32 +152,12 @@ When you click the **Knit** button a document will be generated that includes bo
 
 -->
 
+</div>
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-4" style="background:;">
-  <hgroup>
-    <h2>Something in between</h2>
-  </hgroup>
-  <article data-timings="">
-    <pre><code class="r">summary(cars)
-</code></pre>
-
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00
-</code></pre>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="dark nobackground" id="slide-5" style="background:;">
+<slide class="dark nobackground" id="slide-4" style="background:;">
   <article data-timings="">
     <p style='font-size:100px'>
 <font color='white'>
@@ -170,7 +169,7 @@ R Connectivity
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-6" style="background:;">
+<slide class="" id="slide-5" style="background:;">
   <hgroup>
     <h2>Connect to different data</h2>
   </hgroup>
@@ -190,7 +189,7 @@ R Connectivity
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-7" style="background:;">
+<slide class="" id="slide-6" style="background:;">
   <hgroup>
     <h2>R to flat file</h2>
   </hgroup>
@@ -265,7 +264,7 @@ directory
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-8" style="background:;">
+<slide class="" id="slide-7" style="background:;">
   <hgroup>
     <h2>R to MySQL and SQL</h2>
   </hgroup>
@@ -295,7 +294,7 @@ R packages needed here
 RE_connect &lt;- odbcConnect(&quot;RE7&quot;, uid = &quot;SSRS&quot;, pwd = &quot;xH^SfWJ2R4&quot;)
 gift &lt;- sqlQuery(RE_connect, 
                query = &quot;
-               select RECORDS.CONSTITUENT_ID, ...Truncated
+               select RECORDS.CONSTITUENT_ID, ... from GiftSplit ...Truncated
                where GIFT.DTE between &#39;2016-09-01&#39; and &#39;2016-09-30&#39;
                and GIFT.TYPE in (31) and (FUND.FUND_ID like &#39;%AQ-PHONE%&#39; or FUND.FUND_ID like &#39;%AQ-DDC%&#39;)
                &quot;)
@@ -305,14 +304,20 @@ head(gift)
 <pre><code>Error in sqlQuery(RE_connect, query = &quot;\n               select RECORDS.CONSTITUENT_ID,\n                      GIFT.DTE,\n                      GiftSplit.Amount,\n                      GIFT.TYPE,\n                      APPEAL.APPEAL_ID,\n                      FUND.FUND_ID,\n                      case \n                        when APPEAL.APPEAL_ID like &#39;DDC%&#39; then &#39;Street Recurring&#39;\n                        when APPEAL.APPEAL_ID like &#39;DTD%&#39; then &#39;Door Recurring&#39;\n                        else &#39;Telefundraising Recurring&#39;\n                      end as [GROUP] \n              from GiftSplit\n              left join GIFT\n              on GiftSplit.GiftId = GIFT.ID\n              left join APPEAL\n              on GiftSplit.AppealId = APPEAL.ID\n              left join FUND\n              on GiftSplit.FundId = FUND.ID\n              left join RECORDS\n              on GIFT.CONSTIT_ID = RECORDS.ID\n              where GIFT.DTE between &#39;2013-01-01&#39; and &#39;2016-09-30&#39;\n              and GIFT.TYPE in (31)\n              and (FUND.FUND_ID like &#39;%AQ-PHONE%&#39; \n              or FUND.FUND_ID like &#39;%AQ-DDC%&#39;)\n               &quot;): first argument is not an open RODBC channel
 </code></pre>
 
-<pre><code>Error in head(gift): object &#39;gift&#39; not found
+<pre><code>  CONSTITUENT_ID        DTE Amount TYPE APPEAL_ID      FUND_ID                     GROUP Year month
+1         882766 2014-03-06     40   31  TARC2013 AQ-PHONE2013 Telefundraising Recurring 2014     3
+2         287286 2014-03-06     25   31   DTD1310   AQ-DDC2013            Door Recurring 2014     3
+3         286957 2014-03-06     30   31   DTD1310   AQ-DDC2013            Door Recurring 2014     3
+4         741585 2014-03-06     10   31   DTD1310   AQ-DDC2013            Door Recurring 2014     3
+5         723047 2014-03-06    100   31 T_SHARK13 AQ-PHONE2013 Telefundraising Recurring 2014     3
+6         286779 2014-03-06     25   31   DTD1309   AQ-DDC2013            Door Recurring 2014     3
 </code></pre>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-9" style="background:;">
+<slide class="" id="slide-8" style="background:;">
   <hgroup>
     <h2>R to online data</h2>
   </hgroup>
@@ -322,7 +327,7 @@ head(gift)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-10" style="background:;">
+<slide class="" id="slide-9" style="background:;">
   <hgroup>
     <h2>R to GIS data</h2>
   </hgroup>
@@ -359,7 +364,7 @@ plot(london.shp)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-11" style="background:;">
+<slide class="" id="slide-10" style="background:;">
   <hgroup>
     <h2>R to GIS data</h2>
   </hgroup>
@@ -382,7 +387,7 @@ plot(World.Temp)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-12" style="background:;">
+<slide class="" id="slide-11" style="background:;">
   <hgroup>
     <h2>R to Graph database</h2>
   </hgroup>
@@ -392,7 +397,7 @@ plot(World.Temp)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="dark" id="slide-13" style="background:;">
+<slide class="dark" id="slide-12" style="background:;">
   <article data-timings="">
     <p style='font-size:100px'>
 <font color='white'>
@@ -404,7 +409,7 @@ R data manipulation
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-14" style="background:;">
+<slide class="" id="slide-13" style="background:;">
   <hgroup>
     <h2>Data manipulation using base R functions</h2>
   </hgroup>
@@ -434,7 +439,7 @@ gift.ag1 &lt;- as.data.frame(as.list(aggregate(Amount ~ Year + month + GROUP,
                          )
 
 Sys.time() - start.time
-Time difference of 2.710633 secs
+Time difference of 2.837055 secs
 </code></pre>
 
 </div>
@@ -453,7 +458,7 @@ Time difference of 2.710633 secs
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-15" style="background:;">
+<slide class="" id="slide-14" style="background:;">
   <hgroup>
     <h2>Data manipulation using functions from R packages</h2>
   </hgroup>
@@ -468,7 +473,7 @@ dplyr() pipe operator easy to learn but consumes memory
 
 <p>Using external packages like <code>library(data.table)</code> can really solve the efficiency problem.</p>
 
-<p>When dealing with large data aggregation, it can shrink the time significantly.</p>
+<p>When dealing with large data aggregation, it can shrink the time significantly (Why?).</p>
 
 <p>Other packages like <code>dplyr</code>, <code>reshape2</code> can also help aggregate data for different purposes</p>
 
@@ -482,7 +487,7 @@ gift.ag &lt;- gift.dt[,list(Count = length(Amount),
                          Total = sum(Amount)), 
                    by = list(Year, month, GROUP)]
 Sys.time() - start.time
-Time difference of 0.1627851 secs
+Time difference of 0.162786 secs
 </code></pre>
 
 </div>
@@ -501,7 +506,7 @@ Time difference of 0.1627851 secs
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="dark" id="slide-16" style="background:;">
+<slide class="dark" id="slide-15" style="background:;">
   <article data-timings="">
     <p style='font-size:100px'>
 <font color='white'>
@@ -513,7 +518,7 @@ R data visualization
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-17" style="background:;">
+<slide class="" id="slide-16" style="background:;">
   <hgroup>
     <h2>Base R plot</h2>
   </hgroup>
@@ -528,7 +533,7 @@ plot()
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-18" style="background:;">
+<slide class="" id="slide-17" style="background:;">
   <hgroup>
     <h2>ggplot2 (<font color="red">G</font>rammar of <font color="red">G</font>raphics)</h2>
   </hgroup>
@@ -560,7 +565,7 @@ plot()
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-19" style="background:;">
+<slide class="" id="slide-18" style="background:;">
   <hgroup>
     <h2>ggplot2</h2>
   </hgroup>
@@ -575,7 +580,7 @@ ggplot(data = gift.ag , aes(x=date, y=Count, fill = GROUP)) +
   ggtitle(&quot;Number of Recurring Gift by FR Programme&quot;)
 </code></pre>
 
-<p><img src="assets/fig/unnamed-chunk-15-1.png" alt="plot of chunk unnamed-chunk-15"></p>
+<p><img src="assets/fig/unnamed-chunk-14-1.png" alt="plot of chunk unnamed-chunk-14"></p>
 
 <!--
 
@@ -589,113 +594,1277 @@ This text is red
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-20" style="background:;">
+<slide class="" id="slide-19" style="background:;">
   <hgroup>
     <h2>Interactive plot</h2>
   </hgroup>
   <article data-timings="">
-    <pre><code class="r">library(googleVis)
-options(gvis.plot.tag=&#39;chart&#39;)
-M1 &lt;- gvisMotionChart(Fruits, idvar = &quot;Fruit&quot;, timevar = &quot;Year&quot;)
-show(M1$html$chart)
+     
+<div class='row-fluid'>
+  <div class='span5'>
+    <form id="knitForm19" data-cell="19">
+      <pre><code class="r">library(googleVis)
+#options(gvis.plot.tag=&#39;chart&#39;)
+gmotion &lt;- gvisMotionChart(gift.ag,
+                           idvar = &quot;GROUP&quot;,
+                           timevar = &quot;date&quot;,
+                           xvar = &quot;Count&quot;,
+                           yvar = &quot;Average&quot;,
+                           options = list(width=400, height=300))
+#print(gmotion$html$chart)
+print(gmotion, tag = &#39;chart&#39;)
 </code></pre>
 
-<pre><code>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         jsHeader 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            &quot;&lt;!-- MotionChart generated in R 3.3.1 by googleVis 0.6.1 package --&gt;\n&lt;!-- Wed Nov 16 23:59:45 2016 --&gt;\n\n\n&lt;!-- jsHeader --&gt;\n&lt;script type=\&quot;text/javascript\&quot;&gt;\n&quot; 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           jsData 
-                                                                                                                                                                                                                                                                                                                &quot;\n// jsData \nfunction gvisDataMotionChartIDd6474c15e96 () {\nvar data = new google.visualization.DataTable();\nvar datajson =\n[\n [\n\&quot;Apples\&quot;,\n2008,\n\&quot;West\&quot;,\n98,\n78,\n20,\n\&quot;2008-12-31\&quot;\n],\n[\n\&quot;Apples\&quot;,\n2009,\n\&quot;West\&quot;,\n111,\n79,\n32,\n\&quot;2009-12-31\&quot;\n],\n[\n\&quot;Apples\&quot;,\n2010,\n\&quot;West\&quot;,\n89,\n76,\n13,\n\&quot;2010-12-31\&quot;\n],\n[\n\&quot;Oranges\&quot;,\n2008,\n\&quot;East\&quot;,\n96,\n81,\n15,\n\&quot;2008-12-31\&quot;\n],\n[\n\&quot;Bananas\&quot;,\n2008,\n\&quot;East\&quot;,\n85,\n76,\n9,\n\&quot;2008-12-31\&quot;\n],\n[\n\&quot;Oranges\&quot;,\n2009,\n\&quot;East\&quot;,\n93,\n80,\n13,\n\&quot;2009-12-31\&quot;\n],\n[\n\&quot;Bananas\&quot;,\n2009,\n\&quot;East\&quot;,\n94,\n78,\n16,\n\&quot;2009-12-31\&quot;\n],\n[\n\&quot;Oranges\&quot;,\n2010,\n\&quot;East\&quot;,\n98,\n91,\n7,\n\&quot;2010-12-31\&quot;\n],\n[\n\&quot;Bananas\&quot;,\n2010,\n\&quot;East\&quot;,\n81,\n71,\n10,\n\&quot;2010-12-31\&quot;\n] \n];\ndata.addColumn(&#39;string&#39;,&#39;Fruit&#39;);\ndata.addColumn(&#39;number&#39;,&#39;Year&#39;);\ndata.addColumn(&#39;string&#39;,&#39;Location&#39;);\ndata.addColumn(&#39;number&#39;,&#39;Sales&#39;);\ndata.addColumn(&#39;number&#39;,&#39;Expenses&#39;);\ndata.addColumn(&#39;number&#39;,&#39;Profit&#39;);\ndata.addColumn(&#39;string&#39;,&#39;Date&#39;);\ndata.addRows(datajson);\nreturn(data);\n}\n&quot; 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      jsDrawChart 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             &quot;\n// jsDrawChart\nfunction drawChartMotionChartIDd6474c15e96() {\nvar data = gvisDataMotionChartIDd6474c15e96();\nvar options = {};\noptions[\&quot;width\&quot;] = 600;\noptions[\&quot;height\&quot;] = 500;\noptions[\&quot;state\&quot;] = \&quot;\&quot;;\n\n\n    var chart = new google.visualization.MotionChart(\n    document.getElementById(&#39;MotionChartIDd6474c15e96&#39;)\n    );\n    chart.draw(data,options);\n    \n\n}\n  \n&quot; 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   jsDisplayChart 
-</code></pre>
+<!-- MotionChart generated in R 3.3.1 by googleVis 0.6.1 package -->
 
-<p>&quot;\n// jsDisplayChart\n(function() {\nvar pkgs = window.<strong>gvisPackages = window.</strong>gvisPackages || [];\nvar callbacks = window.<strong>gvisCallbacks = window.</strong>gvisCallbacks || [];\nvar chartid = \&quot;motionchart\&quot;;\n  \n// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)\nvar i, newPackage = true;\nfor (i = 0; newPackage &amp;&amp; i &lt; pkgs.length; i++) {\nif (pkgs[i] === chartid)\nnewPackage = false;\n}\nif (newPackage)\n  pkgs.push(chartid);\n  \n// Add the drawChart function to the global list of callbacks\ncallbacks.push(drawChartMotionChartIDd6474c15e96);\n})();\nfunction displayChartMotionChartIDd6474c15e96() {\n  var pkgs = window.<strong>gvisPackages = window.</strong>gvisPackages || [];\n  var callbacks = window.<strong>gvisCallbacks = window.</strong>gvisCallbacks || [];\n  window.clearTimeout(window.<strong>gvisLoad);\n  // The timeout is set to 100 because otherwise the container div we are\n  // targeting might not be part of the document yet\n  window.</strong>gvisLoad = setTimeout(function() {\n  var pkgCount = pkgs.length;\n  google.load(\&quot;visualization\&quot;, \&quot;1\&quot;, { packages:pkgs, callback: function() {\n  if (pkgCount != pkgs.length) {\n  // Race condition where another setTimeout call snuck in after us; if\n  // that call added a package, we must not shift its callback\n  return;\n}\nwhile (callbacks.length &gt; 0)\ncallbacks.shift()();\n} });\n}, 100);\n}\n&quot; 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             jsFooter 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         &quot;\n// jsFooter\n</script>\n&quot; 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              jsChart 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              &quot;\n&lt;!-- jsChart --&gt;  \n<script type=\"text/javascript\" src=\"https://www.google.com/jsapi?callback=displayChartMotionChartIDd6474c15e96\"></script>\n&quot; 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             divChart 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    &quot;\n&lt;!-- divChart --&gt;\n  \n<div id=\"MotionChartIDd6474c15e96\" \n  style=\"width: 600; height: 500;\">\n</div>\n&quot; </p>
-
-<pre><code class="r">#gmotion
-</code></pre>
-
-<div style='float:left;width:48%;' class='centered'>
-  
-</div>
-<div style='float:right;width:48%;'>
-  
-</div>
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-21" style="background:;">
-  <hgroup>
-    <h2>Motion chart example</h2>
-  </hgroup>
-  <article data-timings="">
-    <pre><code class="r">library(googleVis)
-options(gvis.plot.tag=&#39;chart&#39;)
-Pie &lt;- gvisPieChart(CityPopularity,
-                    options=list(width=400, height=200))
-print(Pie, tag = &#39;chart&#39;)
-</code></pre>
-
-<!-- PieChart generated in R 3.3.1 by googleVis 0.6.1 package -->
-
-<!-- Wed Nov 16 23:42:05 2016 -->
+<!-- Fri Nov 18 22:50:32 2016 -->
 
 <!-- jsHeader -->
 
 <script type="text/javascript">
  
 // jsData 
-function gvisDataPieChartIDd6447a4b9c () {
+function gvisDataMotionChartID2a8832421a5 () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
  [
-"New York",
-200
+"Door Recurring",
+new Date(2014,2,1),
+2014,
+3,
+9486,
+18.59676576,
+176408.92
 ],
 [
-"Boston",
-300
+"Door Recurring",
+new Date(2014,3,1),
+2014,
+4,
+9448,
+18.27035986,
+172618.36
 ],
 [
-"Miami",
-400
+"Door Recurring",
+new Date(2013,0,1),
+2013,
+1,
+10648,
+16.94191491,
+180397.51
 ],
 [
-"Chicago",
-500
+"Door Recurring",
+new Date(2015,10,1),
+2015,
+11,
+8827,
+20.0807647,
+177252.91
 ],
 [
-"Los Angeles",
-600
+"Door Recurring",
+new Date(2015,11,1),
+2015,
+12,
+8718,
+19.9507582,
+173930.71
 ],
 [
-"Houston",
-700
+"Door Recurring",
+new Date(2013,2,1),
+2013,
+3,
+10300,
+17.28493301,
+178034.81
+],
+[
+"Door Recurring",
+new Date(2014,5,1),
+2014,
+6,
+9491,
+18.74148035,
+177875.39
+],
+[
+"Door Recurring",
+new Date(2016,0,1),
+2016,
+1,
+8614,
+20.28150221,
+174704.86
+],
+[
+"Door Recurring",
+new Date(2014,6,1),
+2014,
+7,
+9555,
+18.77020513,
+179349.31
+],
+[
+"Door Recurring",
+new Date(2015,1,1),
+2015,
+2,
+9263,
+19.93174134,
+184627.72
+],
+[
+"Door Recurring",
+new Date(2013,4,1),
+2013,
+5,
+10701,
+17.68477806,
+189244.81
+],
+[
+"Door Recurring",
+new Date(2013,5,1),
+2013,
+6,
+10379,
+17.77368629,
+184473.09
+],
+[
+"Door Recurring",
+new Date(2016,6,1),
+2016,
+7,
+7980,
+19.71189975,
+157300.96
+],
+[
+"Door Recurring",
+new Date(2016,7,1),
+2016,
+8,
+7920,
+19.69272854,
+155966.41
+],
+[
+"Door Recurring",
+new Date(2013,8,1),
+2013,
+9,
+10015,
+17.93727808,
+179641.84
+],
+[
+"Door Recurring",
+new Date(2016,8,1),
+2016,
+9,
+7880,
+19.81446827,
+156138.01
+],
+[
+"Door Recurring",
+new Date(2013,9,1),
+2013,
+10,
+10020,
+17.91602395,
+179518.56
+],
+[
+"Door Recurring",
+new Date(2013,10,1),
+2013,
+11,
+9737,
+18.43261477,
+179478.37
+],
+[
+"Door Recurring",
+new Date(2015,0,1),
+2015,
+1,
+9383,
+19.80146755,
+185797.17
+],
+[
+"Door Recurring",
+new Date(2014,1,1),
+2014,
+2,
+9370,
+18.67224013,
+174958.89
+],
+[
+"Door Recurring",
+new Date(2015,3,1),
+2015,
+4,
+9263,
+19.71783008,
+182646.26
+],
+[
+"Door Recurring",
+new Date(2015,4,1),
+2015,
+5,
+9192,
+20.10631092,
+184817.21
+],
+[
+"Door Recurring",
+new Date(2015,7,1),
+2015,
+8,
+9066,
+20.10597948,
+182280.81
+],
+[
+"Door Recurring",
+new Date(2015,9,1),
+2015,
+10,
+8923,
+19.95063992,
+178019.56
+],
+[
+"Door Recurring",
+new Date(2013,6,1),
+2013,
+7,
+10493,
+17.55761079,
+184232.01
+],
+[
+"Door Recurring",
+new Date(2014,11,1),
+2014,
+12,
+9313,
+19.42815956,
+180934.45
+],
+[
+"Door Recurring",
+new Date(2015,5,1),
+2015,
+6,
+9304,
+19.9901666,
+185988.51
+],
+[
+"Door Recurring",
+new Date(2014,9,1),
+2014,
+10,
+9428,
+19.07694103,
+179857.4
+],
+[
+"Door Recurring",
+new Date(2013,1,1),
+2013,
+2,
+10264,
+17.15469992,
+176075.84
+],
+[
+"Door Recurring",
+new Date(2016,2,1),
+2016,
+3,
+8579,
+20.0481886,
+171993.41
+],
+[
+"Door Recurring",
+new Date(2016,4,1),
+2016,
+5,
+8270,
+19.94400363,
+164936.91
+],
+[
+"Door Recurring",
+new Date(2013,7,1),
+2013,
+8,
+10264,
+18.00665822,
+184820.34
+],
+[
+"Door Recurring",
+new Date(2013,11,1),
+2013,
+12,
+9531,
+17.93102403,
+170900.59
+],
+[
+"Door Recurring",
+new Date(2015,6,1),
+2015,
+7,
+9234,
+20.01499459,
+184818.46
+],
+[
+"Door Recurring",
+new Date(2015,2,1),
+2015,
+3,
+9488,
+20.05045004,
+190238.67
+],
+[
+"Door Recurring",
+new Date(2014,0,1),
+2014,
+1,
+9753,
+18.46032708,
+180043.57
+],
+[
+"Door Recurring",
+new Date(2013,3,1),
+2013,
+4,
+10639,
+17.30006016,
+184055.34
+],
+[
+"Door Recurring",
+new Date(2016,3,1),
+2016,
+4,
+8339,
+19.97391294,
+166562.46
+],
+[
+"Door Recurring",
+new Date(2016,5,1),
+2016,
+6,
+8090,
+19.7993152,
+160176.46
+],
+[
+"Door Recurring",
+new Date(2015,8,1),
+2015,
+9,
+9036,
+19.90416224,
+179854.01
+],
+[
+"Door Recurring",
+new Date(2016,1,1),
+2016,
+2,
+8518,
+20.30154496,
+172928.56
+],
+[
+"Door Recurring",
+new Date(2014,8,1),
+2014,
+9,
+9508,
+19.13761464,
+181960.44
+],
+[
+"Door Recurring",
+new Date(2014,10,1),
+2014,
+11,
+9285,
+19.42320517,
+180344.46
+],
+[
+"Door Recurring",
+new Date(2014,4,1),
+2014,
+5,
+9405,
+19.00749389,
+178765.48
+],
+[
+"Door Recurring",
+new Date(2014,7,1),
+2014,
+8,
+9470,
+19.10663569,
+180939.84
+],
+[
+"Street Recurring",
+new Date(2014,2,1),
+2014,
+3,
+14565,
+15.40297013,
+224344.26
+],
+[
+"Street Recurring",
+new Date(2014,3,1),
+2014,
+4,
+14246,
+15.17175067,
+216136.76
+],
+[
+"Street Recurring",
+new Date(2013,0,1),
+2013,
+1,
+17666,
+14.61177969,
+258131.7
+],
+[
+"Street Recurring",
+new Date(2015,10,1),
+2015,
+11,
+10867,
+14.54101316,
+158017.19
+],
+[
+"Street Recurring",
+new Date(2014,4,1),
+2014,
+5,
+13827,
+15.14855066,
+209459.01
+],
+[
+"Street Recurring",
+new Date(2015,11,1),
+2015,
+12,
+10462,
+14.52974861,
+152010.23
+],
+[
+"Street Recurring",
+new Date(2013,2,1),
+2013,
+3,
+16834,
+15.12901093,
+254681.77
+],
+[
+"Street Recurring",
+new Date(2014,0,1),
+2014,
+1,
+14978,
+15.16900254,
+227201.32
+],
+[
+"Street Recurring",
+new Date(2013,3,1),
+2013,
+4,
+16978,
+14.82901579,
+251767.03
+],
+[
+"Street Recurring",
+new Date(2014,1,1),
+2014,
+2,
+14572,
+15.67304282,
+228387.58
+],
+[
+"Street Recurring",
+new Date(2015,6,1),
+2015,
+7,
+11578,
+14.73189325,
+170565.86
+],
+[
+"Street Recurring",
+new Date(2015,8,1),
+2015,
+9,
+11265,
+14.57697381,
+164209.61
+],
+[
+"Street Recurring",
+new Date(2013,9,1),
+2013,
+10,
+15430,
+14.81837135,
+228647.47
+],
+[
+"Street Recurring",
+new Date(2014,8,1),
+2014,
+9,
+13334,
+14.97451327,
+199670.16
+],
+[
+"Street Recurring",
+new Date(2015,3,1),
+2015,
+4,
+12183,
+15.05245916,
+183384.11
+],
+[
+"Street Recurring",
+new Date(2013,5,1),
+2013,
+6,
+16063,
+14.56539563,
+233963.95
+],
+[
+"Street Recurring",
+new Date(2014,10,1),
+2014,
+11,
+12919,
+14.98014475,
+193528.49
+],
+[
+"Street Recurring",
+new Date(2015,0,1),
+2015,
+1,
+12598,
+15.13986347,
+190732
+],
+[
+"Street Recurring",
+new Date(2013,8,1),
+2013,
+9,
+15450,
+14.7941767,
+228570.03
+],
+[
+"Street Recurring",
+new Date(2015,2,1),
+2015,
+3,
+12516,
+15.16650607,
+189823.99
+],
+[
+"Street Recurring",
+new Date(2015,9,1),
+2015,
+10,
+10967,
+14.59005289,
+160009.11
+],
+[
+"Street Recurring",
+new Date(2016,3,1),
+2016,
+4,
+10282,
+14.89348181,
+153134.78
+],
+[
+"Street Recurring",
+new Date(2016,4,1),
+2016,
+5,
+10566,
+14.87437157,
+157162.61
+],
+[
+"Street Recurring",
+new Date(2016,5,1),
+2016,
+6,
+10193,
+14.69717159,
+149808.27
+],
+[
+"Street Recurring",
+new Date(2015,7,1),
+2015,
+8,
+11439,
+14.60782761,
+167098.94
+],
+[
+"Street Recurring",
+new Date(2016,2,1),
+2016,
+3,
+10437,
+14.63984957,
+152796.11
+],
+[
+"Street Recurring",
+new Date(2013,6,1),
+2013,
+7,
+15920,
+14.55949372,
+231787.14
+],
+[
+"Street Recurring",
+new Date(2014,5,1),
+2014,
+6,
+13864,
+14.88192369,
+206322.99
+],
+[
+"Street Recurring",
+new Date(2016,0,1),
+2016,
+1,
+10528,
+14.64977774,
+154232.86
+],
+[
+"Street Recurring",
+new Date(2013,10,1),
+2013,
+11,
+15080,
+15.04042971,
+226809.68
+],
+[
+"Street Recurring",
+new Date(2015,5,1),
+2015,
+6,
+11932,
+14.76556235,
+176182.69
+],
+[
+"Street Recurring",
+new Date(2013,7,1),
+2013,
+8,
+15540,
+14.61665701,
+227142.85
+],
+[
+"Street Recurring",
+new Date(2014,11,1),
+2014,
+12,
+12576,
+14.96609256,
+188213.58
+],
+[
+"Street Recurring",
+new Date(2014,7,1),
+2014,
+8,
+13508,
+15.10049674,
+203977.51
+],
+[
+"Street Recurring",
+new Date(2016,7,1),
+2016,
+8,
+9937,
+14.52639227,
+144348.76
+],
+[
+"Street Recurring",
+new Date(2016,6,1),
+2016,
+7,
+10016,
+14.69560503,
+147191.18
+],
+[
+"Street Recurring",
+new Date(2014,9,1),
+2014,
+10,
+13100,
+15.15006336,
+198465.83
+],
+[
+"Street Recurring",
+new Date(2014,6,1),
+2014,
+7,
+13750,
+14.92412655,
+205206.74
+],
+[
+"Street Recurring",
+new Date(2015,4,1),
+2015,
+5,
+11824,
+15.00732493,
+177446.61
+],
+[
+"Street Recurring",
+new Date(2013,1,1),
+2013,
+2,
+17171,
+15.01073962,
+257749.41
+],
+[
+"Street Recurring",
+new Date(2015,1,1),
+2015,
+2,
+12414,
+15.33062752,
+190314.41
+],
+[
+"Street Recurring",
+new Date(2016,1,1),
+2016,
+2,
+10240,
+14.87789941,
+152349.69
+],
+[
+"Street Recurring",
+new Date(2013,11,1),
+2013,
+12,
+14899,
+14.97964964,
+223181.8
+],
+[
+"Street Recurring",
+new Date(2016,8,1),
+2016,
+9,
+9637,
+14.60305282,
+140729.62
+],
+[
+"Street Recurring",
+new Date(2013,4,1),
+2013,
+5,
+16479,
+14.73169913,
+242763.67
+],
+[
+"Telefundraising Recurring",
+new Date(2014,2,1),
+2014,
+3,
+4037,
+24.6898489,
+99672.92
+],
+[
+"Telefundraising Recurring",
+new Date(2014,3,1),
+2014,
+4,
+4125,
+24.63313212,
+101611.67
+],
+[
+"Telefundraising Recurring",
+new Date(2013,0,1),
+2013,
+1,
+3203,
+21.47265688,
+68776.92
+],
+[
+"Telefundraising Recurring",
+new Date(2015,10,1),
+2015,
+11,
+5004,
+27.53014388,
+137760.84
+],
+[
+"Telefundraising Recurring",
+new Date(2013,1,1),
+2013,
+2,
+3170,
+21.39705678,
+67828.67
+],
+[
+"Telefundraising Recurring",
+new Date(2014,4,1),
+2014,
+5,
+4240,
+24.91595991,
+105643.67
+],
+[
+"Telefundraising Recurring",
+new Date(2015,11,1),
+2015,
+12,
+4923,
+27.16414585,
+133729.09
+],
+[
+"Telefundraising Recurring",
+new Date(2013,2,1),
+2013,
+3,
+3228,
+21.8332311,
+70477.67
+],
+[
+"Telefundraising Recurring",
+new Date(2014,5,1),
+2014,
+6,
+4238,
+24.86778433,
+105389.67
+],
+[
+"Telefundraising Recurring",
+new Date(2016,0,1),
+2016,
+1,
+4914,
+27.2610582,
+133960.84
+],
+[
+"Telefundraising Recurring",
+new Date(2015,7,1),
+2015,
+8,
+4984,
+27.25799358,
+135853.84
+],
+[
+"Telefundraising Recurring",
+new Date(2015,8,1),
+2015,
+9,
+5116,
+27.5842631,
+141121.09
+],
+[
+"Telefundraising Recurring",
+new Date(2016,1,1),
+2016,
+2,
+4807,
+27.08489494,
+130197.09
+],
+[
+"Telefundraising Recurring",
+new Date(2016,2,1),
+2016,
+3,
+4792,
+27.12960977,
+130005.09
+],
+[
+"Telefundraising Recurring",
+new Date(2016,3,1),
+2016,
+4,
+4692,
+27.00060529,
+126686.84
+],
+[
+"Telefundraising Recurring",
+new Date(2014,7,1),
+2014,
+8,
+4366,
+25.35982822,
+110721.01
+],
+[
+"Telefundraising Recurring",
+new Date(2016,4,1),
+2016,
+5,
+4661,
+27.29620039,
+127227.59
+],
+[
+"Telefundraising Recurring",
+new Date(2013,6,1),
+2013,
+7,
+3906,
+23.69608807,
+92556.92
+],
+[
+"Telefundraising Recurring",
+new Date(2016,5,1),
+2016,
+6,
+4626,
+26.93289883,
+124591.59
+],
+[
+"Telefundraising Recurring",
+new Date(2016,6,1),
+2016,
+7,
+4733,
+27.10581872,
+128291.84
+],
+[
+"Telefundraising Recurring",
+new Date(2016,7,1),
+2016,
+8,
+4820,
+27.17989419,
+131007.09
+],
+[
+"Telefundraising Recurring",
+new Date(2014,9,1),
+2014,
+10,
+4702,
+25.73777329,
+121019.01
+],
+[
+"Telefundraising Recurring",
+new Date(2014,10,1),
+2014,
+11,
+4673,
+26.12540338,
+122084.01
+],
+[
+"Telefundraising Recurring",
+new Date(2014,11,1),
+2014,
+12,
+4763,
+25.91875079,
+123451.01
+],
+[
+"Telefundraising Recurring",
+new Date(2013,11,1),
+2013,
+12,
+3787,
+23.84669131,
+90307.42
+],
+[
+"Telefundraising Recurring",
+new Date(2015,1,1),
+2015,
+2,
+4669,
+26.15003427,
+122094.51
+],
+[
+"Telefundraising Recurring",
+new Date(2015,2,1),
+2015,
+3,
+4727,
+26.63163952,
+125887.76
+],
+[
+"Telefundraising Recurring",
+new Date(2015,5,1),
+2015,
+6,
+4982,
+27.24533521,
+135736.26
+],
+[
+"Telefundraising Recurring",
+new Date(2013,7,1),
+2013,
+8,
+3915,
+24.07398978,
+94249.67
+],
+[
+"Telefundraising Recurring",
+new Date(2014,0,1),
+2014,
+1,
+3861,
+24.15932919,
+93279.17
+],
+[
+"Telefundraising Recurring",
+new Date(2013,4,1),
+2013,
+5,
+3550,
+22.83652676,
+81069.67
+],
+[
+"Telefundraising Recurring",
+new Date(2014,8,1),
+2014,
+9,
+4492,
+25.95464381,
+116588.26
+],
+[
+"Telefundraising Recurring",
+new Date(2013,8,1),
+2013,
+9,
+3793,
+24.29394147,
+92146.92
+],
+[
+"Telefundraising Recurring",
+new Date(2013,10,1),
+2013,
+11,
+3839,
+24.16571243,
+92772.17
+],
+[
+"Telefundraising Recurring",
+new Date(2015,3,1),
+2015,
+4,
+4690,
+26.38838166,
+123761.51
+],
+[
+"Telefundraising Recurring",
+new Date(2015,4,1),
+2015,
+5,
+4792,
+26.84244783,
+128629.01
+],
+[
+"Telefundraising Recurring",
+new Date(2013,9,1),
+2013,
+10,
+3819,
+23.81118617,
+90934.92
+],
+[
+"Telefundraising Recurring",
+new Date(2013,5,1),
+2013,
+6,
+3703,
+23.13655685,
+85674.67
+],
+[
+"Telefundraising Recurring",
+new Date(2016,8,1),
+2016,
+9,
+4895,
+27.27596323,
+133515.84
+],
+[
+"Telefundraising Recurring",
+new Date(2015,0,1),
+2015,
+1,
+4737,
+26.02960946,
+123302.26
+],
+[
+"Telefundraising Recurring",
+new Date(2014,6,1),
+2014,
+7,
+4215,
+24.98230605,
+105300.42
+],
+[
+"Telefundraising Recurring",
+new Date(2013,3,1),
+2013,
+4,
+3380,
+22.38148521,
+75649.42
+],
+[
+"Telefundraising Recurring",
+new Date(2015,6,1),
+2015,
+7,
+5001,
+27.14117377,
+135733.01
+],
+[
+"Telefundraising Recurring",
+new Date(2014,1,1),
+2014,
+2,
+3845,
+24.15375033,
+92871.17
+],
+[
+"Telefundraising Recurring",
+new Date(2015,9,1),
+2015,
+10,
+5081,
+27.51896083,
+139823.84
 ] 
 ];
-data.addColumn('string','City');
-data.addColumn('number','Popularity');
+data.addColumn('string','GROUP');
+data.addColumn('date','date');
+data.addColumn('number','Year');
+data.addColumn('number','month');
+data.addColumn('number','Count');
+data.addColumn('number','Average');
+data.addColumn('number','Total');
 data.addRows(datajson);
 return(data);
 }
  
 // jsDrawChart
-function drawChartPieChartIDd6447a4b9c() {
-var data = gvisDataPieChartIDd6447a4b9c();
+function drawChartMotionChartID2a8832421a5() {
+var data = gvisDataMotionChartID2a8832421a5();
 var options = {};
-options["allowHtml"] = true;
 options["width"] = 400;
-options["height"] = 200;
+options["height"] = 300;
+options["state"] = "\n{\"xAxisOption\":\"4\",\"yAxisOption\":\"5\",\"dimensions\":{\"iconDimensions\":[\"dim0\"]}}\n";
 
-    var chart = new google.visualization.PieChart(
-    document.getElementById('PieChartIDd6447a4b9c')
+    var chart = new google.visualization.MotionChart(
+    document.getElementById('MotionChartID2a8832421a5')
     );
     chart.draw(data,options);
     
@@ -707,7 +1876,7 @@ options["height"] = 200;
 (function() {
 var pkgs = window.__gvisPackages = window.__gvisPackages || [];
 var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
-var chartid = "corechart";
+var chartid = "motionchart";
   
 // Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
 var i, newPackage = true;
@@ -719,9 +1888,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartPieChartIDd6447a4b9c);
+callbacks.push(drawChartMotionChartID2a8832421a5);
 })();
-function displayChartPieChartIDd6447a4b9c() {
+function displayChartMotionChartID2a8832421a5() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -747,14 +1916,233 @@ callbacks.shift()();
 
 <!-- jsChart -->  
 
-<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartPieChartIDd6447a4b9c"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartMotionChartID2a8832421a5"></script>
  
 
 <!-- divChart -->
 
-<div id="PieChartIDd6447a4b9c" 
-  style="width: 400; height: 200;">
+<div id="MotionChartID2a8832421a5" 
+  style="width: 400; height: 300;">
 </div>
+
+      <div id='aceeditor19' style="height:px;"></div>
+      <div class='interactive btn-toolbar pull-left'>
+        <div class='btn-group'>
+          <a class='btn btn-small action-button' id='runCode19' data-action='runCode'
+            data-cell='19' rel='tooltip' data-title='Run Code'>
+            <i class='icon-play'></i>
+          </a>
+          <a class='btn btn-small iBtn' id='testCode19' data-action='testCode'
+             data-cell='19' rel='tooltip' data-title='Test Code'>
+            <i class='icon-check'></i>
+          </a>
+          <a class='btn btn-small iBtn' id='clearResult19' data-action='clearResult'
+             data-cell='19' rel='tooltip' data-title='Clear Output'>
+            <i class="icon-remove"></i>
+          </a>
+          <a class='btn  btn-small iBtn' id='getHint19' rel='tooltip' 
+            data-title="Get Hint" data-action='getHint'
+            data-cell='19' data-hint="">
+            <i class="icon-bookmark"></i>
+          </a>
+        </div>
+      </div>    </form>
+  </div>
+  <div class='span7'>
+    <iframe id="knitResult19" class='shiny-html-output'></iframe>
+  </div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>Interactive Console</h2>
+  </hgroup>
+  <article data-timings="">
+     
+<div class='row-fluid'>
+  <div class='span5'>
+    <form id="knitForm20" data-cell="20">
+      <pre><code class="r">require(googleVis)
+M1 &lt;- gvisMotionChart(Fruits, idvar = &#39;Fruit&#39;, timevar = &#39;Year&#39;)
+print(M1, tag = &#39;chart&#39;)
+</code></pre>
+
+<pre><code>## &lt;!-- MotionChart generated in R 3.3.1 by googleVis 0.6.1 package --&gt;
+## &lt;!-- Fri Nov 18 22:50:52 2016 --&gt;
+## 
+## 
+## &lt;!-- jsHeader --&gt;
+## &lt;script type=&quot;text/javascript&quot;&gt;
+##  
+## // jsData 
+## function gvisDataMotionChartID2a884ee72c22 () {
+## var data = new google.visualization.DataTable();
+## var datajson =
+## [
+##  [
+## &quot;Apples&quot;,
+## 2008,
+## &quot;West&quot;,
+## 98,
+## 78,
+## 20,
+## &quot;2008-12-31&quot;
+## ],
+## [
+## &quot;Apples&quot;,
+## 2009,
+## &quot;West&quot;,
+## 111,
+## 79,
+## 32,
+## &quot;2009-12-31&quot;
+## ],
+## [
+## &quot;Apples&quot;,
+## 2010,
+## &quot;West&quot;,
+## 89,
+## 76,
+## 13,
+## &quot;2010-12-31&quot;
+## ],
+## [
+## &quot;Oranges&quot;,
+## 2008,
+## &quot;East&quot;,
+## 96,
+## 81,
+## 15,
+## &quot;2008-12-31&quot;
+## ],
+## [
+## &quot;Bananas&quot;,
+## 2008,
+## &quot;East&quot;,
+## 85,
+## 76,
+## 9,
+## &quot;2008-12-31&quot;
+## ],
+## [
+## &quot;Oranges&quot;,
+## 2009,
+## &quot;East&quot;,
+## 93,
+## 80,
+## 13,
+## &quot;2009-12-31&quot;
+## ],
+## [
+## &quot;Bananas&quot;,
+## 2009,
+## &quot;East&quot;,
+## 94,
+## 78,
+## 16,
+## &quot;2009-12-31&quot;
+## ],
+## [
+## &quot;Oranges&quot;,
+## 2010,
+## &quot;East&quot;,
+## 98,
+## 91,
+## 7,
+## &quot;2010-12-31&quot;
+## ],
+## [
+## &quot;Bananas&quot;,
+## 2010,
+## &quot;East&quot;,
+## 81,
+## 71,
+## 10,
+## &quot;2010-12-31&quot;
+## ] 
+## ];
+## data.addColumn(&#39;string&#39;,&#39;Fruit&#39;);
+## data.addColumn(&#39;number&#39;,&#39;Year&#39;);
+## data.addColumn(&#39;string&#39;,&#39;Location&#39;);
+## data.addColumn(&#39;number&#39;,&#39;Sales&#39;);
+## data.addColumn(&#39;number&#39;,&#39;Expenses&#39;);
+## data.addColumn(&#39;number&#39;,&#39;Profit&#39;);
+## data.addColumn(&#39;string&#39;,&#39;Date&#39;);
+## data.addRows(datajson);
+## return(data);
+## }
+##  
+## // jsDrawChart
+## function drawChartMotionChartID2a884ee72c22() {
+## var data = gvisDataMotionChartID2a884ee72c22();
+## var options = {};
+## options[&quot;width&quot;] = 600;
+## options[&quot;height&quot;] = 500;
+## options[&quot;state&quot;] = &quot;&quot;;
+## 
+## 
+##     var chart = new google.visualization.MotionChart(
+##     document.getElementById(&#39;MotionChartID2a884ee72c22&#39;)
+##     );
+##     chart.draw(data,options);
+##     
+## 
+## }
+##   
+##  
+## // jsDisplayChart
+## (function() {
+## var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+## var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+## var chartid = &quot;motionchart&quot;;
+##   
+## // Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+## var i, newPackage = true;
+## for (i = 0; newPackage &amp;&amp; i &lt; pkgs.length; i++) {
+## if (pkgs[i] === chartid)
+## newPackage = false;
+## }
+## if (newPackage)
+##   pkgs.push(chartid);
+##   
+## // Add the drawChart function to the global list of callbacks
+## callbacks.push(drawChartMotionChartID2a884ee72c22);
+## })();
+## function displayChartMotionChartID2a884ee72c22() {
+##   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+##   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+##   window.clearTimeout(window.__gvisLoad);
+##   // The timeout is set to 100 because otherwise the container div we are
+##   // targeting might not be part of the document yet
+##   window.__gvisLoad = setTimeout(function() {
+##   var pkgCount = pkgs.length;
+##   google.load(&quot;visualization&quot;, &quot;1&quot;, { packages:pkgs, callback: function() {
+##   if (pkgCount != pkgs.length) {
+##   // Race condition where another setTimeout call snuck in after us; if
+##   // that call added a package, we must not shift its callback
+##   return;
+## }
+## while (callbacks.length &gt; 0)
+## callbacks.shift()();
+## } });
+## }, 100);
+## }
+##  
+## // jsFooter
+## &lt;/script&gt;
+##  
+## &lt;!-- jsChart --&gt;  
+## &lt;script type=&quot;text/javascript&quot; src=&quot;https://www.google.com/jsapi?callback=displayChartMotionChartID2a884ee72c22&quot;&gt;&lt;/script&gt;
+##  
+## &lt;!-- divChart --&gt;
+##   
+## &lt;div id=&quot;MotionChartID2a884ee72c22&quot; 
+##   style=&quot;width: 600; height: 500;&quot;&gt;
+## &lt;/div&gt;
+</code></pre>
 
 <!--
 
@@ -763,11 +2151,38 @@ associate with javascript
 
 -->
 
+      <div id='aceeditor20' style="height:px;"></div>
+      <div class='interactive btn-toolbar pull-left'>
+        <div class='btn-group'>
+          <a class='btn btn-small action-button' id='runCode20' data-action='runCode'
+            data-cell='20' rel='tooltip' data-title='Run Code'>
+            <i class='icon-play'></i>
+          </a>
+          <a class='btn btn-small iBtn' id='testCode20' data-action='testCode'
+             data-cell='20' rel='tooltip' data-title='Test Code'>
+            <i class='icon-check'></i>
+          </a>
+          <a class='btn btn-small iBtn' id='clearResult20' data-action='clearResult'
+             data-cell='20' rel='tooltip' data-title='Clear Output'>
+            <i class="icon-remove"></i>
+          </a>
+          <a class='btn  btn-small iBtn' id='getHint20' rel='tooltip' 
+            data-title="Get Hint" data-action='getHint'
+            data-cell='20' data-hint="">
+            <i class="icon-bookmark"></i>
+          </a>
+        </div>
+      </div>    </form>
+  </div>
+  <div class='span7'>
+    <iframe id="knitResult20" class='shiny-html-output'></iframe>
+  </div>
+</div>
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="dark" id="slide-22" style="background:;">
+<slide class="dark" id="slide-21" style="background:;">
   <article data-timings="">
     <p style='font-size:100px'>
 <font color='white'>
@@ -779,7 +2194,7 @@ R shiny dashboard
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-23" style="background:;">
+<slide class="" id="slide-22" style="background:;">
   <hgroup>
     <h2>Integrate R output with dashboard</h2>
   </hgroup>
@@ -805,7 +2220,7 @@ R shiny dashboard
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-24" style="background:;">
+<slide class="" id="slide-23" style="background:;">
   <hgroup>
     <h2>Realtion between ui.R and server.R</h2>
   </hgroup>
@@ -819,7 +2234,7 @@ R shiny dashboard
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-25" style="background:;">
+<slide class="" id="slide-24" style="background:;">
   <hgroup>
     <h2>Shiny application demo</h2>
   </hgroup>
@@ -842,7 +2257,7 @@ R shiny dashboard
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-26" style="background:;">
+<slide class="" id="slide-25" style="background:;">
   <hgroup>
     <h2>Publish/deploy dashboard online</h2>
   </hgroup>
@@ -852,7 +2267,7 @@ R shiny dashboard
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="dark" id="slide-27" style="background:;">
+<slide class="dark" id="slide-26" style="background:;">
   <article data-timings="">
     <p style='font-size:100px'>
 <font color='white'>
@@ -864,7 +2279,7 @@ Write document in R
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-28" style="background:;">
+<slide class="" id="slide-27" style="background:;">
   <hgroup>
     <h2>Knitr in R</h2>
   </hgroup>
@@ -874,7 +2289,7 @@ Write document in R
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-29" style="background:;">
+<slide class="" id="slide-28" style="background:;">
   <hgroup>
     <h2>Presentation in R slidify</h2>
   </hgroup>
@@ -884,7 +2299,7 @@ Write document in R
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-30" style="background:;">
+<slide class="" id="slide-29" style="background:;">
   <article data-timings="">
     
   </article>
@@ -915,37 +2330,37 @@ Write document in R
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=4 title='Something in between'>
+        data-slide=4 title='NA'>
          4
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=5 title='NA'>
+        data-slide=5 title='Connect to different data'>
          5
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=6 title='Connect to different data'>
+        data-slide=6 title='R to flat file'>
          6
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=7 title='R to flat file'>
+        data-slide=7 title='R to MySQL and SQL'>
          7
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=8 title='R to MySQL and SQL'>
+        data-slide=8 title='R to online data'>
          8
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=9 title='R to online data'>
+        data-slide=9 title='R to GIS data'>
          9
       </a>
     </li>
@@ -957,122 +2372,116 @@ Write document in R
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=11 title='R to GIS data'>
+        data-slide=11 title='R to Graph database'>
          11
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=12 title='R to Graph database'>
+        data-slide=12 title='NA'>
          12
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=13 title='NA'>
+        data-slide=13 title='Data manipulation using base R functions'>
          13
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=14 title='Data manipulation using base R functions'>
+        data-slide=14 title='Data manipulation using functions from R packages'>
          14
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=15 title='Data manipulation using functions from R packages'>
+        data-slide=15 title='NA'>
          15
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=16 title='NA'>
+        data-slide=16 title='Base R plot'>
          16
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=17 title='Base R plot'>
+        data-slide=17 title='ggplot2 (<font color="red">G</font>rammar of <font color="red">G</font>raphics)'>
          17
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=18 title='ggplot2 (<font color="red">G</font>rammar of <font color="red">G</font>raphics)'>
+        data-slide=18 title='ggplot2'>
          18
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=19 title='ggplot2'>
+        data-slide=19 title='Interactive plot'>
          19
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=20 title='Interactive plot'>
+        data-slide=20 title='Interactive Console'>
          20
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=21 title='Motion chart example'>
+        data-slide=21 title='NA'>
          21
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=22 title='NA'>
+        data-slide=22 title='Integrate R output with dashboard'>
          22
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=23 title='Integrate R output with dashboard'>
+        data-slide=23 title='Realtion between ui.R and server.R'>
          23
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=24 title='Realtion between ui.R and server.R'>
+        data-slide=24 title='Shiny application demo'>
          24
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=25 title='Shiny application demo'>
+        data-slide=25 title='Publish/deploy dashboard online'>
          25
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=26 title='Publish/deploy dashboard online'>
+        data-slide=26 title='NA'>
          26
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=27 title='NA'>
+        data-slide=27 title='Knitr in R'>
          27
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=28 title='Knitr in R'>
+        data-slide=28 title='Presentation in R slidify'>
          28
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=29 title='Presentation in R slidify'>
+        data-slide=29 title='NA'>
          29
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=30 title='NA'>
-         30
       </a>
     </li>
   </ul>
@@ -1084,6 +2493,14 @@ Write document in R
   <![endif]-->
 </body>
   <!-- Load Javascripts for Widgets -->
+  <script src="libraries/widgets/interactive/js/ace/js/ace.js"></script>
+<script src="libraries/widgets/interactive/js/opencpu-0.5.js"></script>
+<script src="libraries/widgets/interactive/js/interactive.js"></script>
+
+  <script src="shared/shiny.js" type="text/javascript"></script>
+  <script src="shared/slider/js/jquery.slider.min.js"></script>
+  <script src="shared/bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="shared/slider/css/jquery.slider.min.css"></link>
   
   <!-- LOAD HIGHLIGHTER JS FILES -->
   <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
