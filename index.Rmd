@@ -1,0 +1,604 @@
+---
+title: "Greenpeace Insight Skillshare"
+author: "Martin Hou"
+date: '`r format(Sys.time(), "%d %B, %Y")`'
+output:
+  ioslides_presentation:
+    <!--css: styles.css -->
+    incremental: yes
+    logo: sb7ixc5z.png
+    transition: default
+    widescreen: yes
+  slidy_presentation:
+    incremental: yes
+job: Data Specialist
+logo: sb7ixc5z.png
+license: by-nc-sa
+mode: selfcontained
+hitheme: tomorrow
+highlighter : highlight.js
+subtitle: R Programming Demo
+framework: io2012
+widgets: []
+github      :
+  user      : martinhyy
+  repo      : R-Skillshare
+---
+
+
+
+
+<style>
+pre code, pre, code {
+
+  overflow-x: scroll !important;
+
+
+}
+
+
+aside.gdbar img{
+  
+  width: 80px;
+  height: 80px;
+
+
+}
+
+div.centered {
+
+  text-align: left;
+
+
+}
+
+</style>
+
+
+## Introducing R
+<!--
+This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.-->
+<br> </br>
+> - # R is a programming language for statistical computing
+
+> - # khskshdkfjh
+
+> - # kdfhkhdfkhsd
+
+> - # skdfkhsfkh
+
+---
+
+## Why R
+<br> </br>
+
+> - # R is free and open source
+
+> - # Reading different data from different platform
+
+> - # Provides different data manipulation packages and functions
+
+> - # Data modelling, forecasting and a lot other analytic functions
+
+> - # Data visualization: basic R plot and interactive plots integrated with Google visualization and javascript libraries 
+
+> - # `shiny` dashboard: integrate analysis output to dashboard and share with others
+
+> - # Markdown Documentation
+
+---
+
+## Some stats about R
+<!--
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+-->
+
+---
+
+## Something in between
+
+```{r}
+summary(cars)
+```
+
+--- .dark .nobackground
+
+<p style='font-size:100px'>
+<font color='white'>
+R Connectivity 
+</font>
+</p>
+
+
+--- 
+
+## Connect to different data
+
+<br> </br>
+
+> - # flat/txt file: `read.table()`
+
+> - # csv file: `read.csv()`
+
+> - # MySQL/SQL database: `odbcConnect("ServerName", uid = "UserName", pwd = "Password")`
+
+> - # Online data
+
+> - # GIS data: `readOGR()`
+
+> - # Graph database: <a href="https://neo4j.com/developer/r/"> `RNeo4j` </a>
+
+
+
+--- &twocol
+
+## R to flat file 
+<!--
+comment = NA helps remove the # in the output
+echo = FLASE means only show the final output make all R code and relating comments invisible
+prompt = TRUE you will see a little + symbol 
+-->
+
+*** =left
+
+Load a txt file into R
+
+```{r, tidy.opts=list(width.cutoff=40), comment=NA, eval=TRUE, prompt=FALSE, opts.label = 'interactive'} 
+df <- read.table("X:\\Box Sync\\Fundraising\\Analysis\\Martin\\Bangkok_Skillshare\\Data\\SMS.txt",
+                 header = T,
+                 sep = "\t")
+head(df)
+
+```
+<!--make these two examples side by side-->
+
+*** =right
+
+Load a csv file into R
+
+```{r, tidy.opts=list(width.cutoff=40), opts.label = 'interactive', comment=NA, eval=TRUE, prompt=FALSE}
+df <- read.csv("X:\\Box Sync\\Fundraising\\Analysis\\Martin\\Bangkok_Skillshare\\Data\\SMS.csv",
+               header = T,
+               stringsAsFactors = F)
+head(df)
+
+```
+
+---
+
+## R to MySQL and SQL
+<style type="text/css">
+
+code.r{ /* Code block */
+  font-size: 15px;
+}
+
+code.vhdl{
+
+  font-size: 15px;
+
+}
+
+
+</style>
+
+<!--
+Base functions in R don't have the ability to connect to database
+R packages needed here
+
+-->
+```{r, comment=NA, warning=FALSE, eval=FALSE, message=FALSE}
+library(RODBC)
+RE_connect <- odbcConnect("RE7", uid = "SSRS", pwd = "xH^SfWJ2R4")
+gift <- sqlQuery(RE_connect, 
+               query = "
+               select RECORDS.CONSTITUENT_ID, ...Truncated
+               where GIFT.DTE between '2016-09-01' and '2016-09-30'
+               and GIFT.TYPE in (31) and (FUND.FUND_ID like '%AQ-PHONE%' or FUND.FUND_ID like '%AQ-DDC%')
+               ")
+head(gift)
+
+
+```
+
+```{r, comment=NA, warning=FALSE, echo=FALSE, tidy=TRUE}
+options(width = 100)
+library(RODBC)
+RE_connect <- odbcConnect("RE7", uid = "SSRS", pwd = "xH^SfWJ2R4")
+gift <- sqlQuery(RE_connect, 
+               query = "
+               select RECORDS.CONSTITUENT_ID,
+                      GIFT.DTE,
+                      GiftSplit.Amount,
+                      GIFT.TYPE,
+                      APPEAL.APPEAL_ID,
+                      FUND.FUND_ID,
+                      case 
+                        when APPEAL.APPEAL_ID like 'DDC%' then 'Street Recurring'
+                        when APPEAL.APPEAL_ID like 'DTD%' then 'Door Recurring'
+                        else 'Telefundraising Recurring'
+                      end as [GROUP] 
+              from GiftSplit
+              left join GIFT
+              on GiftSplit.GiftId = GIFT.ID
+              left join APPEAL
+              on GiftSplit.AppealId = APPEAL.ID
+              left join FUND
+              on GiftSplit.FundId = FUND.ID
+              left join RECORDS
+              on GIFT.CONSTIT_ID = RECORDS.ID
+              where GIFT.DTE between '2013-01-01' and '2016-09-30'
+              and GIFT.TYPE in (31)
+              and (FUND.FUND_ID like '%AQ-PHONE%' 
+              or FUND.FUND_ID like '%AQ-DDC%')
+               ")
+
+head(gift)
+```
+
+
+
+---
+
+## R to online data
+
+--- &twocol
+
+## R to GIS data
+
+Shapefile and raster data can be imported into R
+
+- Shapefile into R
+
+*** =left
+```{r, warning=FALSE, message=FALSE, comment=NA, eval=FALSE, tidy=TRUE}
+library(rgdal)
+london.shp <- readOGR(dsn = "X:\\Box Sync\\Fundraising\\Analysis\\Martin\\Bangkok_Skillshare\\Data\\ESRI",
+                      layer = "London_Borough_Excluding_MHW")
+plot(london.shp)
+
+```
+
+*** =right
+
+```{r, fig.width=5, fig.height=5, echo=FALSE, results='hide', warning=FALSE}
+# code will not show up in this part but will give the result
+library(rgdal)
+london.shp <- readOGR(dsn = "X:\\Box Sync\\Fundraising\\Analysis\\Martin\\Bangkok_Skillshare\\Data\\ESRI",
+                      layer = "London_Borough_Excluding_MHW")
+class(london.shp)
+plot(london.shp)
+```
+
+---
+
+## R to GIS data
+
+- Raster data into R
+
+<!--
+word temperature data
+
+-->
+
+
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+library(raster)
+World.Temp <- getData('worldclim', var = 'tmax', res = 10)
+plot(World.Temp)
+
+```
+
+
+---
+
+## R to Graph database
+
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+
+
+
+
+```
+
+--- .dark
+
+
+<p style='font-size:100px'>
+<font color='white'>
+R data manipulation 
+</font>
+</p>
+
+--- &twocol
+
+## Data manipulation using base R functions
+<!--
+data.frame()
+aggregate()
+
+The problem of using R base functions to manipulate data is sometimes when the dataset gets larger the process could be slower
+
+why?
+
+It's the problem of how R works
+
+-->
+
+Base function like `aggregate()` gives us the ability to aggregate raw data without using any external packages.
+
+However `aggregate()` is not really efficient when dataset gets larger and aggregation becomes complex. 
+
+*** =left
+
+```{r, echo=FALSE}
+
+gift$DTE <- as.Date(gift$DTE)
+
+gift$Year <- year(gift$DTE)
+
+gift$month <- month(gift$DTE)
+
+```
+
+
+```{r, warning=FALSE, comment=NA,collapse=TRUE}
+start.time <- Sys.time()
+gift.ag1 <- as.data.frame(as.list(aggregate(Amount ~ Year + month + GROUP,
+                      data = gift, 
+                      FUN = function(x) c(Count = length(x), Average = mean(x), Total = sum(x)))
+                                 )
+                         )
+
+Sys.time() - start.time
+```
+
+*** =right
+
+```{r, comment=NA, echo=FALSE}
+head(gift.ag1)
+```
+
+
+
+--- &twocol
+
+## Data manipulation using functions from R packages
+
+<!--
+
+data.table() shorter code and memory efficient but hard to learn
+dplyr() pipe operator easy to learn but consumes memory
+
+
+-->
+
+Using external packages like `library(data.table)` can really solve the efficiency problem.
+
+When dealing with large data aggregation, it can shrink the time significantly.
+
+Other packages like `dplyr`, `reshape2` can also help aggregate data for different purposes
+
+
+*** =left
+
+
+```{r, warning=FALSE, message=FALSE, tidy=FALSE, comment=NA, collapse=TRUE}
+library(data.table)
+load("F:\\Software backup\\gift.RData")
+start.time <- Sys.time()
+gift.dt <- data.table(gift)
+gift.ag <- gift.dt[,list(Count = length(Amount), 
+                         Average = mean(Amount), 
+                         Total = sum(Amount)), 
+                   by = list(Year, month, GROUP)]
+Sys.time() - start.time
+```
+
+
+
+*** =right
+```{r, comment=NA, echo=FALSE}
+head(gift.ag)
+gift.ag$date <- as.Date(paste(gift.ag$Year,gift.ag$month, 1, sep = "-"))
+```
+
+
+--- .dark
+
+<p style='font-size:100px'>
+<font color='white'>
+R data visualization 
+</font>
+</p>
+
+---
+
+## Base R plot
+<!--
+plot()
+
+
+-->
+
+
+---
+
+## ggplot2 (<font color="red">G</font>rammar of <font color="red">G</font>raphics)
+
+<br>
+# The basic idea of ggplot
+> - # ggplot2 deals with long table
+
+> - # ggplot2 pivots a long table into a Excel like pivot table and then visualize the data
+       > - specify columns/fields to be used in x and y axis
+       > - specify which column/fields you want to break the data by
+       > - specify the plot type by adding (`+`) layers on the canvas 
+           - geom_bar()
+           - geom_line()
+           - geom_point()
+           - etc
+       > - Add other layers to customize colour, label, title, caption and background     
+
+---
+
+## ggplot2
+# Example of ggplot
+
+```{r, comment=NA, fig.width=14, fig.height=4.5}
+library(ggplot2)
+gift.ag <- gift.ag[order(gift.ag$GROUP, descending = FALSE),]
+
+ggplot(data = gift.ag , aes(x=date, y=Count, fill = GROUP)) +
+  geom_bar(stat = "identity") +
+  ggtitle("Number of Recurring Gift by FR Programme")
+```
+
+
+
+<!--
+
+<div class="red2">
+This text is red
+</div>sdfsfdf
+
+-->
+
+--- &twocol
+
+## Interactive plot
+
+
+
+```{r motionchartcode1, results='asis', message=FALSE, warning=FALSE}
+library(googleVis)
+options(gvis.plot.tag='chart')
+M1 <- gvisMotionChart(Fruits, idvar = "Fruit", timevar = "Year")
+show(M1$html$chart)
+#gmotion
+```
+
+---
+
+## Motion chart example
+
+```{r motionchartcode, results='asis'}
+library(googleVis)
+options(gvis.plot.tag='chart')
+Pie <- gvisPieChart(CityPopularity,
+                    options=list(width=400, height=200))
+print(Pie, tag = 'chart')
+
+```
+
+
+
+<!--
+
+associate with javascript
+
+
+-->
+
+--- .dark
+
+<p style='font-size:100px'>
+<font color='white'>
+R shiny dashboard 
+</font>
+</p>
+
+---
+## Integrate R output with dashboard
+
+<br></br>
+
+> - # [shiny](http://shiny.rstudio.com/tutorial/) is an external R package (`library(shiny)`) that can be used to integrated analysis results and share with others.
+
+> - # Shiny application can make the results from your output interactive and dynamic.
+
+> - # Structure of a shiny application
+       > - ui.R: <br>
+           Control the layout, `input` value and present `output`.
+       > - server.R:<br>
+           Process the calculation based on the `input` value and produce `output`.
+       > - global.R (optional):<br>
+           Preload static information needed
+
+---
+
+## Realtion between ui.R and server.R
+
+<!--![relation](http://www.alternatestack.com/wp-content/uploads/2014/03/UiServerInteraction.png =100x) -->
+<br></br>
+<center><img src="http://www.alternatestack.com/wp-content/uploads/2014/03/UiServerInteraction.png" width="80%" height="80%"></center>
+
+
+
+---
+
+## Shiny application demo
+
+<br></br>
+
+> - # Demo 1: <br>
+    # Google Motion Chart and Twitter WordCloud
+    
+> - # Demo 2: <br>
+    # [Saves Report](https://martinhyy.shinyapps.io/SaveReport/) for Supporter Relationship Team
+    
+> - # Demo 3: <br>
+    # [Geographic Gallery](https://martinhyy.shinyapps.io/ShinyApp/)
+
+
+---
+## Publish/deploy dashboard online
+
+--- .dark
+
+<p style='font-size:100px'>
+<font color='white'>
+Write document in R
+</font>
+</p>
+
+---
+## Knitr in R
+
+---
+## Presentation in R slidify
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Greenpeace Insight Skillshare</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Greenpeace Insight Skillshare">
+  <meta name="author" content="Martin Hou">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/interactive/css/aceeditor.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <aside class="gdbar">
+    <img src="assets/img/sb7ixc5z.png">
+  </aside>
+  <hgroup class="auto-fadein">
+    <h1>Greenpeace Insight Skillshare</h1>
+    <h2>R Programming Demo</h2>
+    <p>Martin Hou<br/>Data Specialist</p>
+  </hgroup>
+  <article></article>  
+  <footer class = 'license'>
+    <a href='http://creativecommons.org/licenses/by-nc-sa/3.0/'>
+    <img width = '80px' src = 'http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png'>
+    </a>
+  </footer>
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Introducing R</h2>
+  </hgroup>
+  <article data-timings="">
+    <!--
+This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.-->
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Some stats about R</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Bullet 1</li>
+<li>Bullet 2</li>
+<li>Bullet 3</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Something in between</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">summary(cars)
+</code></pre>
+
+<pre><code>##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="segue.dark" id="slide-4" style="background:;">
+  <article data-timings="">
+    <p>R Connectivity</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>R to flat file</h2>
+  </hgroup>
+  <article data-timings="">
+    <!--
+comment = NA helps remove the # in the output
+echo = FLASE means only show the final output make all R code and relating comments invisible
+prompt = TRUE you will see a little + symbol 
+-->
+
+<p>Load a txt file into R</p>
+
+<pre><code class="r">df &lt;- read.table(&quot;X:\\Box Sync\\Fundraising\\Analysis\\Martin\\Bangkok_Skillshare\\Data\\SMS.txt&quot;,
+                 header = T,
+                 stringsAsFactors = F,
+                 sep = &quot;\t&quot;)
+
+head(df)
+</code></pre>
+
+<!--make these two examples side by side-->
+
+<p>Load a csv file into R</p>
+
+<pre><code class="r">df &lt;- read.csv(&quot;X:\\Box Sync\\Fundraising\\Analysis\\Martin\\Bangkok_Skillshare\\Data\\SMS.csv&quot;,
+               header = T,
+               stringsAsFactors = F)
+head(df)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>R to MySQL and SQL</h2>
+  </hgroup>
+  <article data-timings="">
+    <!--
+Base functions in R don't have the ability to connect to database
+R packages needed here
+
+-->
+
+<pre><code class="r">library(RODBC)
+RE_connect &lt;- odbcConnect(&quot;RE7&quot;, uid = &quot;SSRS&quot;, pwd = &quot;xH^SfWJ2R4&quot;)
+df &lt;- sqlQuery(RE_connect, 
+               query = &quot;
+               select RECORDS.CONSTITUENT_ID,
+                      GIFT.DTE,
+                      GiftSplit.Amount,
+                      GIFT.TYPE,
+                      APPEAL.APPEAL_ID,
+                      FUND.FUND_ID,
+                      case 
+                        when APPEAL.APPEAL_ID like &#39;DDC%&#39; then &#39;Street Recurring&#39;
+                        when APPEAL.APPEAL_ID like &#39;DTD%&#39; then &#39;Door Recurring&#39;
+                        else &#39;Telefundraising Recurring&#39;
+                      end as [GROUP] 
+              from GiftSplit
+              left join GIFT
+              on GiftSplit.GiftId = GIFT.ID
+              left join APPEAL
+              on GiftSplit.AppealId = APPEAL.ID
+              left join FUND
+              on GiftSplit.FundId = FUND.ID
+              left join RECORDS
+              on GIFT.CONSTIT_ID = RECORDS.ID
+              where GIFT.DTE between &#39;2016-09-01&#39; and &#39;2016-09-30&#39;
+              and GIFT.TYPE in (31)
+              and (FUND.FUND_ID like &#39;%AQ-PHONE%&#39; 
+              or FUND.FUND_ID like &#39;%AQ-DDC%&#39;)
+               &quot;)
+
+head(df)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>R to online data</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>R to GIS data</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Shapefile and raster data can be imported into R</p>
+
+<ul class = "build incremental">
+<li>Shapefile into R</li>
+</ul>
+
+<pre><code class="r">library(rgdal)
+
+london.shp &lt;- readOGR(dsn = &quot;X:\\Box Sync\\Fundraising\\Analysis\\Martin\\Bangkok_Skillshare\\Data\\ESRI&quot;,
+                      layer = &quot;London_Borough_Excluding_MHW&quot;)
+
+plot(london.shp)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>R to GIS data</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul class = "build incremental">
+<li>Raster data into R</li>
+</ul>
+
+<!--
+word temperature data
+
+-->
+
+<pre><code class="r">library(raster)
+World.Temp &lt;- getData(&#39;worldclim&#39;, var = &#39;tmax&#39;, res = 10)
+plot(World.Temp)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>R to Graph database</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h1>R data manipulation</h1>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>Data manipulation using base R functions</h2>
+  </hgroup>
+  <article data-timings="">
+    <!--
+data.frame()
+aggregate()
+
+The problem of using R base functions to manipulate data is sometimes when the dataset gets larger the process could be slower
+
+why?
+
+It's the problem of how R works
+
+-->
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Data manipulation using functions from R packages</h2>
+  </hgroup>
+  <article data-timings="">
+    <!--
+
+data.table() shorter code and memory efficient but hard to learn
+dplyr() pipe operator easy to learn but consumes memory
+
+
+-->
+
+<pre><code class="r">library(data.table)
+load(&quot;X:\\Box Sync\\Fundraising\\Analysis\\Martin\\Bangkok_Skillshare\\Data\\gift.RData&quot;)
+start.time &lt;- Sys.time()
+
+gift.dt &lt;- data.table(gift)
+gift.ag &lt;- gift.dt[,list(Count = length(Amount), Average = mean(Amount), Total = sum(Amount)), by = list(Year, month, GROUP)]
+Sys.time() - start.time
+
+head(gift.ag)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h1>R data visualization</h1>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>Base R plot</h2>
+  </hgroup>
+  <article data-timings="">
+    <!--
+plot()
+
+
+-->
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>ggplot2 (Grammar of Graphics)</h2>
+  </hgroup>
+  <article data-timings="">
+    <!--
+
+<div class="red2">
+This text is red
+</div>sdfsfdf
+
+-->
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>Interactive plot</h2>
+  </hgroup>
+  <article data-timings="">
+    <!--
+
+associate with javascript
+
+
+-->
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h1>R shiny dashboard</h1>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>Integrate R output with dashboard</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>Publish/deploy dashboard online</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h1>Write document in R</h1>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>Knitr in R</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-23" style="background:;">
+  <hgroup>
+    <h2>Presentation in R slidify</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-24" style="background:;">
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Introducing R'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Some stats about R'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Something in between'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='NA'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='R to flat file'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='R to MySQL and SQL'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='R to online data'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='R to GIS data'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='R to GIS data'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='R to Graph database'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='R data manipulation'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='Data manipulation using base R functions'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='Data manipulation using functions from R packages'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='R data visualization'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='Base R plot'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='ggplot2 (Grammar of Graphics)'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='Interactive plot'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='R shiny dashboard'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='Integrate R output with dashboard'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='Publish/deploy dashboard online'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='Write document in R'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='Knitr in R'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='Presentation in R slidify'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='NA'>
+         24
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  <script src="libraries/widgets/interactive/js/ace/js/ace.js"></script>
+<script src="libraries/widgets/interactive/js/opencpu-0.5.js"></script>
+<script src="libraries/widgets/interactive/js/interactive.js"></script>
+
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
