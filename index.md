@@ -481,7 +481,11 @@ This text is red
 
 ## Interactive plot
 
-R itself
+- # R itself doesn't have interactive plotting function.
+
+- # External packages can integrate javascript, Google visualization to produce interactive plot
+
+- # The plot below uses Google Motion Chart to show how our fundraising performs over year
 
 *** =left
 
