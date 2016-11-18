@@ -161,7 +161,7 @@ prompt = TRUE you will see a little + symbol
 Load a txt file into R
 
 ```{r, tidy.opts=list(width.cutoff=40), comment=NA, eval=TRUE, prompt=FALSE, opts.label = 'interactive'} 
-df <- read.table("X:\\Box Sync\\Fundraising\\Analysis\\Martin\\Bangkok_Skillshare\\Data\\SMS.txt",
+df <- read.table("F:\\Work\\Greenpeace\\R Skillshare\\Data\\SMS.txt",
                  header = T,
                  sep = "\t")
 head(df)
@@ -174,7 +174,7 @@ head(df)
 Load a csv file into R
 
 ```{r, tidy.opts=list(width.cutoff=40), opts.label = 'interactive', comment=NA, eval=TRUE, prompt=FALSE}
-df <- read.csv("X:\\Box Sync\\Fundraising\\Analysis\\Martin\\Bangkok_Skillshare\\Data\\SMS.csv",
+df <- read.csv("F:\\Work\\Greenpeace\\R Skillshare\\Data\\SMS.csv",
                header = T,
                stringsAsFactors = F)
 head(df)
@@ -217,8 +217,8 @@ head(gift)
 
 
 ```
-
-```{r, comment=NA, warning=FALSE, echo=FALSE, tidy=TRUE}
+<!--
+```{r, comment=NA, warning=FALSE, echo=FALSE, eval=FALSE, tidy=TRUE}
 options(width = 100)
 library(RODBC)
 RE_connect <- odbcConnect("RE7", uid = "SSRS", pwd = "xH^SfWJ2R4")
@@ -252,6 +252,12 @@ gift <- sqlQuery(RE_connect,
 
 head(gift)
 ```
+-->
+```{r comment=NA, echo=FALSE}
+options(width = 100)
+load("F:\\Software backup\\gift.RData")
+head(gift)
+```
 
 
 
@@ -270,7 +276,7 @@ Shapefile and raster data can be imported into R
 *** =left
 ```{r, warning=FALSE, message=FALSE, comment=NA, eval=FALSE, tidy=TRUE}
 library(rgdal)
-london.shp <- readOGR(dsn = "X:\\Box Sync\\Fundraising\\Analysis\\Martin\\Bangkok_Skillshare\\Data\\ESRI",
+london.shp <- readOGR(dsn = "F:\\Work\\Greenpeace\\R Skillshare\\Data\\ESRI",
                       layer = "London_Borough_Excluding_MHW")
 plot(london.shp)
 
@@ -402,7 +408,6 @@ Other packages like `dplyr`, `reshape2` can also help aggregate data for differe
 
 ```{r, warning=FALSE, message=FALSE, tidy=FALSE, comment=NA, collapse=TRUE}
 library(data.table)
-load("F:\\Software backup\\gift.RData")
 start.time <- Sys.time()
 gift.dt <- data.table(gift)
 gift.ag <- gift.dt[,list(Count = length(Amount), 

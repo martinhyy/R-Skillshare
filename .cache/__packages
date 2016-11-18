@@ -4,3 +4,5 @@ RODBC
 data.table
 ggplot2
 googleVis
+sp
+rgdal
