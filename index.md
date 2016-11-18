@@ -1,7 +1,7 @@
 ---
 title: "Greenpeace Insight Skillshare"
 author: "Martin Hou"
-date: '18 November, 2016'
+date: '19 November, 2016'
 output:
   ioslides_presentation:
     <!--css: styles.css -->
@@ -22,7 +22,7 @@ framework: io2012
 widgets: [shiny, interactive]
 github      :
   user      : martinhyy
-  repo      : Insight_Skillshare
+  repo      : R-Skillshare
 --- 
 
 
@@ -480,6 +480,8 @@ This text is red
 --- &twocol
 
 ## Interactive plot
+
+R itself
 
 *** =left
 

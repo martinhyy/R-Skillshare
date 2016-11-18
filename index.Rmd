@@ -22,7 +22,7 @@ framework: io2012
 widgets: [shiny, interactive]
 github      :
   user      : martinhyy
-  repo      : Insight_Skillshare
+  repo      : R-Skillshare
 --- 
 
 
@@ -488,6 +488,8 @@ This text is red
 --- &twocol
 
 ## Interactive plot
+
+R itself
 
 *** =left
 ```{r motionchartcode1, results='asis', warning=FALSE, message=FALSE, opts.label='interactive', eval=FALSE}
