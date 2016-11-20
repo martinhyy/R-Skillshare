@@ -1,10 +1,9 @@
 base
 slidify
-RODBC
-data.table
-ggplot2
-googleVis
 sp
 rgdal
-dplyr
+data.table
 reshape2
+ggplot2
+googleVis
+jsonlite

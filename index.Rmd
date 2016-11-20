@@ -52,6 +52,13 @@ div.centered {
 
 }
 
+/*
+code.coffeescript {
+
+  font-size: 5px;
+
+}
+*/
 </style>
 
 
@@ -264,6 +271,22 @@ head(gift)
 ---
 
 ## R to online data
+
+Online data can be imported into data and parsed to a normal R data frame through URL.
+
+The example below is how to parse a json data to a normal data table.
+
+
+```{r jsontoR, warning=FALSE, message=FALSE, comment=NA}
+library(jsonlite)
+url <- "http://www.fao.org/figis/vrmf/finder/services/public/vessels/search?c=true&gd=true&nof=false&not=false&nol=false&ps=30&o=0&user=NOT_SET"
+fishery <- fromJSON(txt=url)
+data <- fishery$data$dataSet
+data.tidy <- subset(data,select = c(name, gearType, gearTypeID))
+head(data.tidy)
+```
+
+
 
 --- &twocol
 
@@ -620,7 +643,7 @@ Write document in R
 
 ---
 
-
+## Q & A
 
 
 
