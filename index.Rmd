@@ -442,6 +442,27 @@ plot()
 
 -->
 
+> - # `plot()`
+
+> - # `barplot()`
+
+--- 
+
+## Example of stack barplot
+
+
+```{r stackbarplot, warning=FALSE, comment=NA, eval=TRUE, results='asis', fig.width=12, fig.height=4.5}
+
+barplot(as.matrix(gift.stack[,-1]),
+        col=c("darkblue","red", "green"))
+legend("topright",
+       inset=c(-0.2,0), 
+       legend = unique(gift.stack$GROUP), 
+       fill = c("darkblue","red", "green"))
+
+```
+
+
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Greenpeace Insight Skillshare"
 author: "Martin Hou"
-date: '19 November, 2016'
+date: '20 November, 2016'
 output:
   ioslides_presentation:
     <!--css: styles.css -->
@@ -431,6 +431,28 @@ plot()
 
 -->
 
+> - # `plot()`
+
+> - # `barplot()`
+
+--- 
+
+## Example of stack barplot
+
+
+
+```r
+barplot(as.matrix(gift.stack[,-1]),
+        col=c("darkblue","red", "green"))
+legend("topright",
+       inset=c(-0.2,0), 
+       legend = unique(gift.stack$GROUP), 
+       fill = c("darkblue","red", "green"))
+```
+
+![plot of chunk stackbarplot](assets/fig/stackbarplot-1.png)
+
+
 
 ---
 
@@ -505,18 +527,36 @@ print(gmotion, tag = 'chart')
 *** =right
 
 <!-- MotionChart generated in R 3.3.1 by googleVis 0.6.1 package -->
-<!-- Fri Nov 18 23:51:51 2016 -->
+<!-- Sun Nov 20 21:40:35 2016 -->
 
 
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataMotionChartID20ec1063125 () {
+function gvisDataMotionChartID139c665b78bb () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
  [
+"Door Recurring",
+new Date(2016,7,1),
+2016,
+8,
+7920,
+19.69272854,
+155966.41
+],
+[
+"Door Recurring",
+new Date(2014,5,1),
+2014,
+6,
+9491,
+18.74148035,
+177875.39
+],
+[
 "Door Recurring",
 new Date(2014,2,1),
 2014,
@@ -581,12 +621,12 @@ new Date(2013,5,1),
 ],
 [
 "Door Recurring",
-new Date(2016,7,1),
+new Date(2016,6,1),
 2016,
-8,
-7920,
-19.69272854,
-155966.41
+7,
+7980,
+19.71189975,
+157300.96
 ],
 [
 "Door Recurring",
@@ -614,15 +654,6 @@ new Date(2013,9,1),
 10020,
 17.91602395,
 179518.56
-],
-[
-"Door Recurring",
-new Date(2013,10,1),
-2013,
-11,
-9737,
-18.43261477,
-179478.37
 ],
 [
 "Door Recurring",
@@ -689,24 +720,6 @@ new Date(2015,10,1),
 ],
 [
 "Door Recurring",
-new Date(2016,2,1),
-2016,
-3,
-8579,
-20.0481886,
-171993.41
-],
-[
-"Door Recurring",
-new Date(2014,10,1),
-2014,
-11,
-9285,
-19.42320517,
-180344.46
-],
-[
-"Door Recurring",
 new Date(2013,2,1),
 2013,
 3,
@@ -725,66 +738,21 @@ new Date(2013,3,1),
 ],
 [
 "Door Recurring",
-new Date(2015,8,1),
+new Date(2016,2,1),
+2016,
+3,
+8579,
+20.0481886,
+171993.41
+],
+[
+"Door Recurring",
+new Date(2015,6,1),
 2015,
-9,
-9036,
-19.90416224,
-179854.01
-],
-[
-"Door Recurring",
-new Date(2013,7,1),
-2013,
-8,
-10264,
-18.00665822,
-184820.34
-],
-[
-"Door Recurring",
-new Date(2014,5,1),
-2014,
-6,
-9491,
-18.74148035,
-177875.39
-],
-[
-"Door Recurring",
-new Date(2013,6,1),
-2013,
 7,
-10493,
-17.55761079,
-184232.01
-],
-[
-"Door Recurring",
-new Date(2016,5,1),
-2016,
-6,
-8090,
-19.7993152,
-160176.46
-],
-[
-"Door Recurring",
-new Date(2014,8,1),
-2014,
-9,
-9508,
-19.13761464,
-181960.44
-],
-[
-"Door Recurring",
-new Date(2016,6,1),
-2016,
-7,
-7980,
-19.71189975,
-157300.96
+9234,
+20.01499459,
+184818.46
 ],
 [
 "Door Recurring",
@@ -833,12 +801,12 @@ new Date(2016,3,1),
 ],
 [
 "Door Recurring",
-new Date(2014,11,1),
+new Date(2014,9,1),
 2014,
-12,
-9313,
-19.42815956,
-180934.45
+10,
+9428,
+19.07694103,
+179857.4
 ],
 [
 "Door Recurring",
@@ -860,12 +828,30 @@ new Date(2016,4,1),
 ],
 [
 "Door Recurring",
-new Date(2015,2,1),
+new Date(2013,7,1),
+2013,
+8,
+10264,
+18.00665822,
+184820.34
+],
+[
+"Door Recurring",
+new Date(2013,11,1),
+2013,
+12,
+9531,
+17.93102403,
+170900.59
+],
+[
+"Door Recurring",
+new Date(2015,8,1),
 2015,
-3,
-9488,
-20.05045004,
-190238.67
+9,
+9036,
+19.90416224,
+179854.01
 ],
 [
 "Door Recurring",
@@ -887,12 +873,21 @@ new Date(2014,7,1),
 ],
 [
 "Door Recurring",
-new Date(2013,11,1),
-2013,
-12,
-9531,
-17.93102403,
-170900.59
+new Date(2014,8,1),
+2014,
+9,
+9508,
+19.13761464,
+181960.44
+],
+[
+"Door Recurring",
+new Date(2016,5,1),
+2016,
+6,
+8090,
+19.7993152,
+160176.46
 ],
 [
 "Door Recurring",
@@ -905,21 +900,93 @@ new Date(2015,5,1),
 ],
 [
 "Door Recurring",
-new Date(2015,6,1),
-2015,
-7,
-9234,
-20.01499459,
-184818.46
+new Date(2014,11,1),
+2014,
+12,
+9313,
+19.42815956,
+180934.45
 ],
 [
 "Door Recurring",
-new Date(2014,9,1),
+new Date(2013,6,1),
+2013,
+7,
+10493,
+17.55761079,
+184232.01
+],
+[
+"Door Recurring",
+new Date(2014,10,1),
 2014,
+11,
+9285,
+19.42320517,
+180344.46
+],
+[
+"Door Recurring",
+new Date(2015,2,1),
+2015,
+3,
+9488,
+20.05045004,
+190238.67
+],
+[
+"Door Recurring",
+new Date(2013,10,1),
+2013,
+11,
+9737,
+18.43261477,
+179478.37
+],
+[
+"Street Recurring",
+new Date(2014,3,1),
+2014,
+4,
+14246,
+15.17175067,
+216136.76
+],
+[
+"Street Recurring",
+new Date(2015,9,1),
+2015,
 10,
-9428,
-19.07694103,
-179857.4
+10967,
+14.59005289,
+160009.11
+],
+[
+"Street Recurring",
+new Date(2015,3,1),
+2015,
+4,
+12183,
+15.05245916,
+183384.11
+],
+[
+"Street Recurring",
+new Date(2014,4,1),
+2014,
+5,
+13827,
+15.14855066,
+209459.01
+],
+[
+"Street Recurring",
+new Date(2016,3,1),
+2016,
+4,
+10282,
+14.89348181,
+153134.78
 ],
 [
 "Street Recurring",
@@ -1058,84 +1125,21 @@ new Date(2016,4,1),
 ],
 [
 "Street Recurring",
-new Date(2013,7,1),
-2013,
-8,
-15540,
-14.61665701,
-227142.85
-],
-[
-"Street Recurring",
-new Date(2013,6,1),
-2013,
-7,
-15920,
-14.55949372,
-231787.14
-],
-[
-"Street Recurring",
-new Date(2015,2,1),
-2015,
-3,
-12516,
-15.16650607,
-189823.99
-],
-[
-"Street Recurring",
-new Date(2014,3,1),
-2014,
-4,
-14246,
-15.17175067,
-216136.76
-],
-[
-"Street Recurring",
-new Date(2014,4,1),
-2014,
-5,
-13827,
-15.14855066,
-209459.01
-],
-[
-"Street Recurring",
-new Date(2015,3,1),
-2015,
-4,
-12183,
-15.05245916,
-183384.11
-],
-[
-"Street Recurring",
-new Date(2015,9,1),
-2015,
-10,
-10967,
-14.59005289,
-160009.11
-],
-[
-"Street Recurring",
-new Date(2016,3,1),
-2016,
-4,
-10282,
-14.89348181,
-153134.78
-],
-[
-"Street Recurring",
 new Date(2016,5,1),
 2016,
 6,
 10193,
 14.69717159,
 149808.27
+],
+[
+"Street Recurring",
+new Date(2013,7,1),
+2013,
+8,
+15540,
+14.61665701,
+227142.85
 ],
 [
 "Street Recurring",
@@ -1148,6 +1152,24 @@ new Date(2016,6,1),
 ],
 [
 "Street Recurring",
+new Date(2016,8,1),
+2016,
+9,
+9637,
+14.60305282,
+140729.62
+],
+[
+"Street Recurring",
+new Date(2013,6,1),
+2013,
+7,
+15920,
+14.55949372,
+231787.14
+],
+[
+"Street Recurring",
 new Date(2014,7,1),
 2014,
 8,
@@ -1157,12 +1179,12 @@ new Date(2014,7,1),
 ],
 [
 "Street Recurring",
-new Date(2016,2,1),
-2016,
+new Date(2015,2,1),
+2015,
 3,
-10437,
-14.63984957,
-152796.11
+12516,
+15.16650607,
+189823.99
 ],
 [
 "Street Recurring",
@@ -1193,6 +1215,24 @@ new Date(2014,6,1),
 ],
 [
 "Street Recurring",
+new Date(2016,2,1),
+2016,
+3,
+10437,
+14.63984957,
+152796.11
+],
+[
+"Street Recurring",
+new Date(2015,11,1),
+2015,
+12,
+10462,
+14.52974861,
+152010.23
+],
+[
+"Street Recurring",
 new Date(2016,0,1),
 2016,
 1,
@@ -1202,12 +1242,48 @@ new Date(2016,0,1),
 ],
 [
 "Street Recurring",
+new Date(2015,7,1),
+2015,
+8,
+11439,
+14.60782761,
+167098.94
+],
+[
+"Street Recurring",
+new Date(2014,11,1),
+2014,
+12,
+12576,
+14.96609256,
+188213.58
+],
+[
+"Street Recurring",
+new Date(2015,5,1),
+2015,
+6,
+11932,
+14.76556235,
+176182.69
+],
+[
+"Street Recurring",
 new Date(2014,9,1),
 2014,
 10,
 13100,
 15.15006336,
 198465.83
+],
+[
+"Street Recurring",
+new Date(2016,1,1),
+2016,
+2,
+10240,
+14.87789941,
+152349.69
 ],
 [
 "Street Recurring",
@@ -1229,78 +1305,6 @@ new Date(2016,7,1),
 ],
 [
 "Street Recurring",
-new Date(2015,11,1),
-2015,
-12,
-10462,
-14.52974861,
-152010.23
-],
-[
-"Street Recurring",
-new Date(2015,7,1),
-2015,
-8,
-11439,
-14.60782761,
-167098.94
-],
-[
-"Street Recurring",
-new Date(2015,5,1),
-2015,
-6,
-11932,
-14.76556235,
-176182.69
-],
-[
-"Street Recurring",
-new Date(2016,1,1),
-2016,
-2,
-10240,
-14.87789941,
-152349.69
-],
-[
-"Street Recurring",
-new Date(2016,8,1),
-2016,
-9,
-9637,
-14.60305282,
-140729.62
-],
-[
-"Street Recurring",
-new Date(2014,11,1),
-2014,
-12,
-12576,
-14.96609256,
-188213.58
-],
-[
-"Street Recurring",
-new Date(2015,4,1),
-2015,
-5,
-11824,
-15.00732493,
-177446.61
-],
-[
-"Street Recurring",
-new Date(2014,2,1),
-2014,
-3,
-14565,
-15.40297013,
-224344.26
-],
-[
-"Street Recurring",
 new Date(2013,1,1),
 2013,
 2,
@@ -1319,12 +1323,30 @@ new Date(2014,5,1),
 ],
 [
 "Street Recurring",
+new Date(2015,4,1),
+2015,
+5,
+11824,
+15.00732493,
+177446.61
+],
+[
+"Street Recurring",
 new Date(2015,1,1),
 2015,
 2,
 12414,
 15.33062752,
 190314.41
+],
+[
+"Street Recurring",
+new Date(2014,2,1),
+2014,
+3,
+14565,
+15.40297013,
+224344.26
 ],
 [
 "Telefundraising Recurring",
@@ -1382,12 +1404,30 @@ new Date(2013,2,1),
 ],
 [
 "Telefundraising Recurring",
+new Date(2014,5,1),
+2014,
+6,
+4238,
+24.86778433,
+105389.67
+],
+[
+"Telefundraising Recurring",
 new Date(2016,0,1),
 2016,
 1,
 4914,
 27.2610582,
 133960.84
+],
+[
+"Telefundraising Recurring",
+new Date(2015,7,1),
+2015,
+8,
+4984,
+27.25799358,
+135853.84
 ],
 [
 "Telefundraising Recurring",
@@ -1436,6 +1476,24 @@ new Date(2016,4,1),
 ],
 [
 "Telefundraising Recurring",
+new Date(2016,5,1),
+2016,
+6,
+4626,
+26.93289883,
+124591.59
+],
+[
+"Telefundraising Recurring",
+new Date(2016,6,1),
+2016,
+7,
+4733,
+27.10581872,
+128291.84
+],
+[
+"Telefundraising Recurring",
 new Date(2016,7,1),
 2016,
 8,
@@ -1454,12 +1512,30 @@ new Date(2014,9,1),
 ],
 [
 "Telefundraising Recurring",
+new Date(2013,9,1),
+2013,
+10,
+3819,
+23.81118617,
+90934.92
+],
+[
+"Telefundraising Recurring",
 new Date(2014,10,1),
 2014,
 11,
 4673,
 26.12540338,
 122084.01
+],
+[
+"Telefundraising Recurring",
+new Date(2014,11,1),
+2014,
+12,
+4763,
+25.91875079,
+123451.01
 ],
 [
 "Telefundraising Recurring",
@@ -1481,15 +1557,6 @@ new Date(2015,1,1),
 ],
 [
 "Telefundraising Recurring",
-new Date(2015,2,1),
-2015,
-3,
-4727,
-26.63163952,
-125887.76
-],
-[
-"Telefundraising Recurring",
 new Date(2015,5,1),
 2015,
 6,
@@ -1508,57 +1575,12 @@ new Date(2013,5,1),
 ],
 [
 "Telefundraising Recurring",
-new Date(2013,9,1),
-2013,
-10,
-3819,
-23.81118617,
-90934.92
-],
-[
-"Telefundraising Recurring",
-new Date(2014,1,1),
-2014,
-2,
-3845,
-24.15375033,
-92871.17
-],
-[
-"Telefundraising Recurring",
-new Date(2014,5,1),
-2014,
-6,
-4238,
-24.86778433,
-105389.67
-],
-[
-"Telefundraising Recurring",
-new Date(2015,7,1),
+new Date(2015,0,1),
 2015,
-8,
-4984,
-27.25799358,
-135853.84
-],
-[
-"Telefundraising Recurring",
-new Date(2015,8,1),
-2015,
-9,
-5116,
-27.5842631,
-141121.09
-],
-[
-"Telefundraising Recurring",
-new Date(2013,6,1),
-2013,
-7,
-3906,
-23.69608807,
-92556.92
+1,
+4737,
+26.02960946,
+123302.26
 ],
 [
 "Telefundraising Recurring",
@@ -1571,39 +1593,21 @@ new Date(2014,8,1),
 ],
 [
 "Telefundraising Recurring",
-new Date(2016,5,1),
-2016,
-6,
-4626,
-26.93289883,
-124591.59
+new Date(2013,10,1),
+2013,
+11,
+3839,
+24.16571243,
+92772.17
 ],
 [
 "Telefundraising Recurring",
-new Date(2016,6,1),
-2016,
-7,
-4733,
-27.10581872,
-128291.84
-],
-[
-"Telefundraising Recurring",
-new Date(2014,11,1),
-2014,
-12,
-4763,
-25.91875079,
-123451.01
-],
-[
-"Telefundraising Recurring",
-new Date(2015,9,1),
+new Date(2015,3,1),
 2015,
-10,
-5081,
-27.51896083,
-139823.84
+4,
+4690,
+26.38838166,
+123761.51
 ],
 [
 "Telefundraising Recurring",
@@ -1616,39 +1620,12 @@ new Date(2013,7,1),
 ],
 [
 "Telefundraising Recurring",
-new Date(2013,3,1),
-2013,
-4,
-3380,
-22.38148521,
-75649.42
-],
-[
-"Telefundraising Recurring",
-new Date(2013,8,1),
-2013,
-9,
-3793,
-24.29394147,
-92146.92
-],
-[
-"Telefundraising Recurring",
-new Date(2015,4,1),
-2015,
-5,
-4792,
-26.84244783,
-128629.01
-],
-[
-"Telefundraising Recurring",
-new Date(2014,0,1),
+new Date(2014,1,1),
 2014,
-1,
-3861,
-24.15932919,
-93279.17
+2,
+3845,
+24.15375033,
+92871.17
 ],
 [
 "Telefundraising Recurring",
@@ -1661,21 +1638,30 @@ new Date(2013,0,1),
 ],
 [
 "Telefundraising Recurring",
+new Date(2015,11,1),
+2015,
+12,
+4923,
+27.16414585,
+133729.09
+],
+[
+"Telefundraising Recurring",
+new Date(2014,0,1),
+2014,
+1,
+3861,
+24.15932919,
+93279.17
+],
+[
+"Telefundraising Recurring",
 new Date(2014,6,1),
 2014,
 7,
 4215,
 24.98230605,
 105300.42
-],
-[
-"Telefundraising Recurring",
-new Date(2015,0,1),
-2015,
-1,
-4737,
-26.02960946,
-123302.26
 ],
 [
 "Telefundraising Recurring",
@@ -1688,30 +1674,30 @@ new Date(2016,8,1),
 ],
 [
 "Telefundraising Recurring",
-new Date(2015,11,1),
+new Date(2015,4,1),
 2015,
-12,
-4923,
-27.16414585,
-133729.09
+5,
+4792,
+26.84244783,
+128629.01
 ],
 [
 "Telefundraising Recurring",
-new Date(2015,6,1),
-2015,
-7,
-5001,
-27.14117377,
-135733.01
-],
-[
-"Telefundraising Recurring",
-new Date(2013,10,1),
+new Date(2013,8,1),
 2013,
-11,
-3839,
-24.16571243,
-92772.17
+9,
+3793,
+24.29394147,
+92146.92
+],
+[
+"Telefundraising Recurring",
+new Date(2013,3,1),
+2013,
+4,
+3380,
+22.38148521,
+75649.42
 ],
 [
 "Telefundraising Recurring",
@@ -1724,12 +1710,48 @@ new Date(2013,4,1),
 ],
 [
 "Telefundraising Recurring",
-new Date(2015,3,1),
+new Date(2015,6,1),
 2015,
-4,
-4690,
-26.38838166,
-123761.51
+7,
+5001,
+27.14117377,
+135733.01
+],
+[
+"Telefundraising Recurring",
+new Date(2013,6,1),
+2013,
+7,
+3906,
+23.69608807,
+92556.92
+],
+[
+"Telefundraising Recurring",
+new Date(2015,8,1),
+2015,
+9,
+5116,
+27.5842631,
+141121.09
+],
+[
+"Telefundraising Recurring",
+new Date(2015,9,1),
+2015,
+10,
+5081,
+27.51896083,
+139823.84
+],
+[
+"Telefundraising Recurring",
+new Date(2015,2,1),
+2015,
+3,
+4727,
+26.63163952,
+125887.76
 ] 
 ];
 data.addColumn('string','GROUP');
@@ -1744,15 +1766,15 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartMotionChartID20ec1063125() {
-var data = gvisDataMotionChartID20ec1063125();
+function drawChartMotionChartID139c665b78bb() {
+var data = gvisDataMotionChartID139c665b78bb();
 var options = {};
 options["width"] = 400;
 options["height"] = 300;
 options["state"] = "\n{\"xAxisOption\":\"4\",\"yAxisOption\":\"5\",\"dimensions\":{\"iconDimensions\":[\"dim0\"]}}\n";
 
     var chart = new google.visualization.MotionChart(
-    document.getElementById('MotionChartID20ec1063125')
+    document.getElementById('MotionChartID139c665b78bb')
     );
     chart.draw(data,options);
     
@@ -1776,9 +1798,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartMotionChartID20ec1063125);
+callbacks.push(drawChartMotionChartID139c665b78bb);
 })();
-function displayChartMotionChartID20ec1063125() {
+function displayChartMotionChartID139c665b78bb() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -1802,11 +1824,11 @@ callbacks.shift()();
 </script>
  
 <!-- jsChart -->  
-<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartMotionChartID20ec1063125"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartMotionChartID139c665b78bb"></script>
  
 <!-- divChart -->
   
-<div id="MotionChartID20ec1063125" 
+<div id="MotionChartID139c665b78bb" 
   style="width: 400; height: 300;">
 </div>
 

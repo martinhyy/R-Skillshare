@@ -6,3 +6,5 @@ ggplot2
 googleVis
 sp
 rgdal
+dplyr
+reshape2
