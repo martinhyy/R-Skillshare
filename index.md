@@ -425,15 +425,20 @@ R data visualization
 ---
 
 ## Base R plot
-<!--
-plot()
+<br>
 
+# Base R provides different functions to fulfil different graphic types 
 
--->
-
-> - # `plot()`
+> - # `plot()` 
 
 > - # `barplot()`
+
+> - # `hist()` histogram for density charts
+
+> - # `pie()` for pie charts
+
+> - # `boxplot()` 
+
 
 --- 
 
@@ -442,12 +447,12 @@ plot()
 
 
 ```r
+library(reshape2)
+gift.trim <- subset(gift.ag, select = c(GROUP, date, Count))
+gift.stack <- dcast(gift.trim, GROUP ~ date)
 barplot(as.matrix(gift.stack[,-1]),
         col=c("darkblue","red", "green"))
-legend("topright",
-       inset=c(-0.2,0), 
-       legend = unique(gift.stack$GROUP), 
-       fill = c("darkblue","red", "green"))
+legend("topleft", legend = unique(gift.stack$GROUP), fill = c("darkblue","red", "green"))
 ```
 
 ![plot of chunk stackbarplot](assets/fig/stackbarplot-1.png)

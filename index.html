@@ -493,15 +493,16 @@ R data visualization
     <h2>Base R plot</h2>
   </hgroup>
   <article data-timings="">
-    <!--
-plot()
+    <p><br></p>
 
-
--->
+<h1>Base R provides different functions to fulfil different graphic types</h1>
 
 <ul class = "build incremental">
 <li><h1><code>plot()</code></h1></li>
 <li><h1><code>barplot()</code></h1></li>
+<li><h1><code>hist()</code> histogram for density charts</h1></li>
+<li><h1><code>pie()</code> for pie charts</h1></li>
+<li><h1><code>boxplot()</code></h1></li>
 </ul>
 
   </article>
@@ -513,12 +514,12 @@ plot()
     <h2>Example of stack barplot</h2>
   </hgroup>
   <article data-timings="">
-    <pre><code class="r">barplot(as.matrix(gift.stack[,-1]),
+    <pre><code class="r">library(reshape2)
+gift.trim &lt;- subset(gift.ag, select = c(GROUP, date, Count))
+gift.stack &lt;- dcast(gift.trim, GROUP ~ date)
+barplot(as.matrix(gift.stack[,-1]),
         col=c(&quot;darkblue&quot;,&quot;red&quot;, &quot;green&quot;))
-legend(&quot;topright&quot;,
-       inset=c(-0.2,0), 
-       legend = unique(gift.stack$GROUP), 
-       fill = c(&quot;darkblue&quot;,&quot;red&quot;, &quot;green&quot;))
+legend(&quot;topleft&quot;, legend = unique(gift.stack$GROUP), fill = c(&quot;darkblue&quot;,&quot;red&quot;, &quot;green&quot;))
 </code></pre>
 
 <p><img src="assets/fig/stackbarplot-1.png" alt="plot of chunk stackbarplot"></p>
