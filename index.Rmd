@@ -115,13 +115,6 @@ IEEE Spectrum (Institude of Electrical and Electronics Engineers) ranked R fifth
 <!--<figcaption>2014 2015 ranking comparison</figcaption>-->
 </figure>
 
-<!--
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
-
--->
 
 
 
@@ -277,7 +270,7 @@ Online data can be imported into data and parsed to a normal R data frame throug
 The example below is how to parse a json data to a normal data table.
 
 
-```{r jsontoR, warning=FALSE, message=FALSE, comment=NA}
+```{r jsontoR, warning=FALSE, message=FALSE, comment=NA, eval=FALSE}
 library(jsonlite)
 url <- "http://www.fao.org/figis/vrmf/finder/services/public/vessels/search?c=true&gd=true&nof=false&not=false&nol=false&ps=30&o=0&user=NOT_SET"
 fishery <- fromJSON(txt=url)
@@ -315,16 +308,14 @@ london.shp <- readOGR(dsn = "F:\\Work\\Greenpeace\\R Skillshare\\Data\\London",
 plot(london.shp)
 ```
 
+<!--
 ---
+
 
 ## R to GIS data
 
 - Raster data into R
 
-<!--
-word temperature data
-
--->
 
 
 ```{r, warning=FALSE, message=FALSE, eval=FALSE}
@@ -333,18 +324,59 @@ World.Temp <- getData('worldclim', var = 'tmax', res = 10)
 plot(World.Temp)
 
 ```
-
+-->
 
 ---
 
 ## R to Graph database
 
+<br>
+
+`RNeo4j` allows users to read and write data from and to Neo4j directly from their R environment.
+
+It allows users to retrieve `Cypher` query results as R data frames, where `Cypher` is <a href="https://neo4j.com/developer/cypher-query-language/">Neo4j's graph language</a>.
+
+
+--- &twocol
+
+## R to Graph database
+
+<br>
+
+The example below shows us how to connect to a graph database and how to use `cypher()` to query the data.
+
+The query returns actor names if they ever acted in a movie together.
+
+*** =left
+
 ```{r, warning=FALSE, message=FALSE, eval=FALSE}
+library(RNeo4j)
+graph = startGraph("http://localhost:7474/db/data/")
+importSample(graph, "movies", input=F)
+query = "
+MATCH (p1:Person)-[:ACTED_IN]->(:Movie)<-[:ACTED_IN]-(p2:Person)
+WHERE p1.name < p2.name
+RETURN p1.name AS from, p2.name AS to, COUNT(*) AS weight
+"
+edges = cypher(graph, query)
+```
 
+*** =right
 
+```{r, eval=FALSE}
+head(edges)
 
+##              from                to weight
+## 1  Brooke Langton      Keanu Reeves      1
+## 2  Jack Nicholson       Kevin Bacon      1
+## 3 Jerry O'Connell Kiefer Sutherland      1
+## 4    Oliver Platt      Sam Rockwell      1
+## 5    John Goodman    Susan Sarandon      1
+## 6     Gary Sinise       Kevin Bacon      1
 
 ```
+
+
 
 --- .dark
 
@@ -376,7 +408,7 @@ However `aggregate()` is not really efficient when dataset gets larger and aggre
 
 *** =left
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 library(data.table)
 gift$DTE <- as.Date(gift$DTE)
 
@@ -627,6 +659,10 @@ R shiny dashboard
 ---
 ## Publish/deploy dashboard online
 
+<br></br>
+
+<center><img src="assets/img/publish.PNG" width="90%" height="90%"/></center>
+
 --- .dark
 
 <p style='font-size:100px'>
@@ -636,14 +672,26 @@ Write document in R
 </p>
 
 ---
-## Knitr in R
+
+## Analysis and Reporting in one environment
+<br>
+# Knitr in R
+
+   > - Write LaTex in R.
+   > - Output document can be saved in pdf fomart.
+   > - R output can be automatically generated and embedded in the pdf file.
+
+<br>
+# R slidify
+   > - Writing `css`, `html` and `R` together to produce report or presentation
 
 ---
-## Presentation in R slidify
 
----
-
-## Q & A
+## Let's enjoy R programming!!
+<br></br>
+<br></br>
+<br></br>
+<center><b> <font size="7">Q & A</font></b></center>
 
 
 

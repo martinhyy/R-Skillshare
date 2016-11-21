@@ -1,7 +1,7 @@
 ---
 title: "Greenpeace Insight Skillshare"
 author: "Martin Hou"
-date: '20 November, 2016'
+date: '21 November, 2016'
 output:
   ioslides_presentation:
     <!--css: styles.css -->
@@ -115,13 +115,6 @@ IEEE Spectrum (Institude of Electrical and Electronics Engineers) ranked R fifth
 <!--<figcaption>2014 2015 ranking comparison</figcaption>-->
 </figure>
 
-<!--
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
-
--->
 
 
 
@@ -278,16 +271,6 @@ data.tidy <- subset(data,select = c(name, gearType, gearTypeID))
 head(data.tidy)
 ```
 
-```
-               name                                 gearType gearTypeID
-1  GARCIA RODRIGUEZ                       Drifting longlines        369
-2         ACECHADOR Handlines and pole-lines (hand-operated)        367
-3           ADELITA                Longlines (not specified)        368
-4 ADMIRAL DE RUITER Handlines and pole-lines (hand-operated)        367
-5        LADY ANNIE                Longlines (not specified)        368
-6          AGNES 83                       Drifting longlines        369
-```
-
 
 
 --- &twocol
@@ -311,16 +294,14 @@ plot(london.shp)
 
 ![plot of chunk unnamed-chunk-7](assets/fig/unnamed-chunk-7-1.png)
 
+<!--
 ---
+
 
 ## R to GIS data
 
 - Raster data into R
 
-<!--
-word temperature data
-
--->
 
 
 
@@ -329,11 +310,58 @@ library(raster)
 World.Temp <- getData('worldclim', var = 'tmax', res = 10)
 plot(World.Temp)
 ```
-
+-->
 
 ---
 
 ## R to Graph database
+
+<br>
+
+`RNeo4j` allows users to read and write data from and to Neo4j directly from their R environment.
+
+It allows users to retrieve `Cypher` query results as R data frames, where `Cypher` is <a href="https://neo4j.com/developer/cypher-query-language/">Neo4j's graph language</a>.
+
+
+--- &twocol
+
+## R to Graph database
+
+<br>
+
+The example below shows us how to connect to a graph database and how to use `cypher()` to query the data.
+
+The query returns actor names if they ever acted in a movie together.
+
+*** =left
+
+
+```r
+library(RNeo4j)
+graph = startGraph("http://localhost:7474/db/data/")
+importSample(graph, "movies", input=F)
+query = "
+MATCH (p1:Person)-[:ACTED_IN]->(:Movie)<-[:ACTED_IN]-(p2:Person)
+WHERE p1.name < p2.name
+RETURN p1.name AS from, p2.name AS to, COUNT(*) AS weight
+"
+edges = cypher(graph, query)
+```
+
+*** =right
+
+
+```r
+head(edges)
+
+##              from                to weight
+## 1  Brooke Langton      Keanu Reeves      1
+## 2  Jack Nicholson       Kevin Bacon      1
+## 3 Jerry O'Connell Kiefer Sutherland      1
+## 4    Oliver Platt      Sam Rockwell      1
+## 5    John Goodman    Susan Sarandon      1
+## 6     Gary Sinise       Kevin Bacon      1
+```
 
 
 
@@ -380,7 +408,7 @@ gift.ag1 <- as.data.frame(as.list(aggregate(Amount ~ Year + month + GROUP,
                          )
 
 Sys.time() - start.time
-Time difference of 2.907256 secs
+Time difference of 2.669675 secs
 ```
 
 *** =right
@@ -430,7 +458,7 @@ gift.ag <- gift.dt[,list(Count = length(Amount),
                          Total = sum(Amount)), 
                    by = list(Year, month, GROUP)]
 Sys.time() - start.time
-Time difference of 0.149694 secs
+Time difference of 0.162564 secs
 ```
 
 
@@ -526,7 +554,7 @@ ggplot(data = gift.ag , aes(x=date, y=Count, fill = GROUP)) +
   ggtitle("Number of Recurring Gift by FR Programme")
 ```
 
-![plot of chunk unnamed-chunk-15](assets/fig/unnamed-chunk-15-1.png)
+![plot of chunk unnamed-chunk-16](assets/fig/unnamed-chunk-16-1.png)
 
 
 
@@ -566,14 +594,14 @@ print(gmotion, tag = 'chart')
 *** =right
 
 <!-- MotionChart generated in R 3.3.1 by googleVis 0.6.1 package -->
-<!-- Sun Nov 20 23:01:41 2016 -->
+<!-- Mon Nov 21 18:20:24 2016 -->
 
 
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataMotionChartID20e46fe06520 () {
+function gvisDataMotionChartID20b4715f6e7f () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -588,48 +616,12 @@ new Date(2014,2,1),
 ],
 [
 "Door Recurring",
-new Date(2014,3,1),
-2014,
-4,
-9448,
-18.27035986,
-172618.36
-],
-[
-"Door Recurring",
-new Date(2013,0,1),
-2013,
-1,
-10648,
-16.94191491,
-180397.51
-],
-[
-"Door Recurring",
-new Date(2015,10,1),
-2015,
-11,
-8827,
-20.0807647,
-177252.91
-],
-[
-"Door Recurring",
 new Date(2015,11,1),
 2015,
 12,
 8718,
 19.9507582,
 173930.71
-],
-[
-"Door Recurring",
-new Date(2013,2,1),
-2013,
-3,
-10300,
-17.28493301,
-178034.81
 ],
 [
 "Door Recurring",
@@ -666,15 +658,6 @@ new Date(2015,1,1),
 9263,
 19.93174134,
 184627.72
-],
-[
-"Door Recurring",
-new Date(2013,4,1),
-2013,
-5,
-10701,
-17.68477806,
-189244.81
 ],
 [
 "Door Recurring",
@@ -795,111 +778,21 @@ new Date(2015,9,1),
 ],
 [
 "Door Recurring",
-new Date(2013,1,1),
-2013,
-2,
-10264,
-17.15469992,
-176075.84
-],
-[
-"Door Recurring",
-new Date(2014,0,1),
-2014,
-1,
-9753,
-18.46032708,
-180043.57
-],
-[
-"Door Recurring",
-new Date(2015,6,1),
+new Date(2015,10,1),
 2015,
-7,
-9234,
-20.01499459,
-184818.46
+11,
+8827,
+20.0807647,
+177252.91
 ],
 [
 "Door Recurring",
-new Date(2015,5,1),
-2015,
-6,
-9304,
-19.9901666,
-185988.51
-],
-[
-"Door Recurring",
-new Date(2013,6,1),
+new Date(2013,2,1),
 2013,
-7,
-10493,
-17.55761079,
-184232.01
-],
-[
-"Door Recurring",
-new Date(2013,7,1),
-2013,
-8,
-10264,
-18.00665822,
-184820.34
-],
-[
-"Door Recurring",
-new Date(2014,8,1),
-2014,
-9,
-9508,
-19.13761464,
-181960.44
-],
-[
-"Door Recurring",
-new Date(2015,8,1),
-2015,
-9,
-9036,
-19.90416224,
-179854.01
-],
-[
-"Door Recurring",
-new Date(2014,9,1),
-2014,
-10,
-9428,
-19.07694103,
-179857.4
-],
-[
-"Door Recurring",
-new Date(2013,11,1),
-2013,
-12,
-9531,
-17.93102403,
-170900.59
-],
-[
-"Door Recurring",
-new Date(2015,2,1),
-2015,
 3,
-9488,
-20.05045004,
-190238.67
-],
-[
-"Door Recurring",
-new Date(2016,4,1),
-2016,
-5,
-8270,
-19.94400363,
-164936.91
+10300,
+17.28493301,
+178034.81
 ],
 [
 "Door Recurring",
@@ -912,12 +805,48 @@ new Date(2013,3,1),
 ],
 [
 "Door Recurring",
-new Date(2016,5,1),
+new Date(2015,6,1),
+2015,
+7,
+9234,
+20.01499459,
+184818.46
+],
+[
+"Door Recurring",
+new Date(2016,2,1),
 2016,
-6,
-8090,
-19.7993152,
-160176.46
+3,
+8579,
+20.0481886,
+171993.41
+],
+[
+"Door Recurring",
+new Date(2015,8,1),
+2015,
+9,
+9036,
+19.90416224,
+179854.01
+],
+[
+"Door Recurring",
+new Date(2013,4,1),
+2013,
+5,
+10701,
+17.68477806,
+189244.81
+],
+[
+"Door Recurring",
+new Date(2014,3,1),
+2014,
+4,
+9448,
+18.27035986,
+172618.36
 ],
 [
 "Door Recurring",
@@ -930,30 +859,12 @@ new Date(2014,4,1),
 ],
 [
 "Door Recurring",
-new Date(2014,10,1),
+new Date(2014,0,1),
 2014,
-11,
-9285,
-19.42320517,
-180344.46
-],
-[
-"Door Recurring",
-new Date(2014,11,1),
-2014,
-12,
-9313,
-19.42815956,
-180934.45
-],
-[
-"Door Recurring",
-new Date(2016,3,1),
-2016,
-4,
-8339,
-19.97391294,
-166562.46
+1,
+9753,
+18.46032708,
+180043.57
 ],
 [
 "Door Recurring",
@@ -966,6 +877,51 @@ new Date(2016,1,1),
 ],
 [
 "Door Recurring",
+new Date(2016,3,1),
+2016,
+4,
+8339,
+19.97391294,
+166562.46
+],
+[
+"Door Recurring",
+new Date(2014,9,1),
+2014,
+10,
+9428,
+19.07694103,
+179857.4
+],
+[
+"Door Recurring",
+new Date(2013,1,1),
+2013,
+2,
+10264,
+17.15469992,
+176075.84
+],
+[
+"Door Recurring",
+new Date(2013,7,1),
+2013,
+8,
+10264,
+18.00665822,
+184820.34
+],
+[
+"Door Recurring",
+new Date(2013,0,1),
+2013,
+1,
+10648,
+16.94191491,
+180397.51
+],
+[
+"Door Recurring",
 new Date(2014,7,1),
 2014,
 8,
@@ -975,21 +931,84 @@ new Date(2014,7,1),
 ],
 [
 "Door Recurring",
-new Date(2016,2,1),
-2016,
-3,
-8579,
-20.0481886,
-171993.41
+new Date(2014,8,1),
+2014,
+9,
+9508,
+19.13761464,
+181960.44
 ],
 [
-"Street Recurring",
-new Date(2014,2,1),
+"Door Recurring",
+new Date(2016,5,1),
+2016,
+6,
+8090,
+19.7993152,
+160176.46
+],
+[
+"Door Recurring",
+new Date(2013,11,1),
+2013,
+12,
+9531,
+17.93102403,
+170900.59
+],
+[
+"Door Recurring",
+new Date(2015,5,1),
+2015,
+6,
+9304,
+19.9901666,
+185988.51
+],
+[
+"Door Recurring",
+new Date(2014,11,1),
 2014,
+12,
+9313,
+19.42815956,
+180934.45
+],
+[
+"Door Recurring",
+new Date(2016,4,1),
+2016,
+5,
+8270,
+19.94400363,
+164936.91
+],
+[
+"Door Recurring",
+new Date(2014,10,1),
+2014,
+11,
+9285,
+19.42320517,
+180344.46
+],
+[
+"Door Recurring",
+new Date(2013,6,1),
+2013,
+7,
+10493,
+17.55761079,
+184232.01
+],
+[
+"Door Recurring",
+new Date(2015,2,1),
+2015,
 3,
-14565,
-15.40297013,
-224344.26
+9488,
+20.05045004,
+190238.67
 ],
 [
 "Street Recurring",
@@ -1026,15 +1045,6 @@ new Date(2014,4,1),
 13827,
 15.14855066,
 209459.01
-],
-[
-"Street Recurring",
-new Date(2015,11,1),
-2015,
-12,
-10462,
-14.52974861,
-152010.23
 ],
 [
 "Street Recurring",
@@ -1200,66 +1210,12 @@ new Date(2016,5,1),
 ],
 [
 "Street Recurring",
-new Date(2016,8,1),
-2016,
-9,
-9637,
-14.60305282,
-140729.62
-],
-[
-"Street Recurring",
 new Date(2013,7,1),
 2013,
 8,
 15540,
 14.61665701,
 227142.85
-],
-[
-"Street Recurring",
-new Date(2016,0,1),
-2016,
-1,
-10528,
-14.64977774,
-154232.86
-],
-[
-"Street Recurring",
-new Date(2014,6,1),
-2014,
-7,
-13750,
-14.92412655,
-205206.74
-],
-[
-"Street Recurring",
-new Date(2015,7,1),
-2015,
-8,
-11439,
-14.60782761,
-167098.94
-],
-[
-"Street Recurring",
-new Date(2016,7,1),
-2016,
-8,
-9937,
-14.52639227,
-144348.76
-],
-[
-"Street Recurring",
-new Date(2014,5,1),
-2014,
-6,
-13864,
-14.88192369,
-206322.99
 ],
 [
 "Street Recurring",
@@ -1272,12 +1228,102 @@ new Date(2016,6,1),
 ],
 [
 "Street Recurring",
-new Date(2013,1,1),
+new Date(2016,8,1),
+2016,
+9,
+9637,
+14.60305282,
+140729.62
+],
+[
+"Street Recurring",
+new Date(2013,6,1),
 2013,
-2,
-17171,
-15.01073962,
-257749.41
+7,
+15920,
+14.55949372,
+231787.14
+],
+[
+"Street Recurring",
+new Date(2016,2,1),
+2016,
+3,
+10437,
+14.63984957,
+152796.11
+],
+[
+"Street Recurring",
+new Date(2014,7,1),
+2014,
+8,
+13508,
+15.10049674,
+203977.51
+],
+[
+"Street Recurring",
+new Date(2013,10,1),
+2013,
+11,
+15080,
+15.04042971,
+226809.68
+],
+[
+"Street Recurring",
+new Date(2013,4,1),
+2013,
+5,
+16479,
+14.73169913,
+242763.67
+],
+[
+"Street Recurring",
+new Date(2014,6,1),
+2014,
+7,
+13750,
+14.92412655,
+205206.74
+],
+[
+"Street Recurring",
+new Date(2015,11,1),
+2015,
+12,
+10462,
+14.52974861,
+152010.23
+],
+[
+"Street Recurring",
+new Date(2016,0,1),
+2016,
+1,
+10528,
+14.64977774,
+154232.86
+],
+[
+"Street Recurring",
+new Date(2015,7,1),
+2015,
+8,
+11439,
+14.60782761,
+167098.94
+],
+[
+"Street Recurring",
+new Date(2014,11,1),
+2014,
+12,
+12576,
+14.96609256,
+188213.58
 ],
 [
 "Street Recurring",
@@ -1290,12 +1336,12 @@ new Date(2015,5,1),
 ],
 [
 "Street Recurring",
-new Date(2013,10,1),
-2013,
-11,
-15080,
-15.04042971,
-226809.68
+new Date(2014,9,1),
+2014,
+10,
+13100,
+15.15006336,
+198465.83
 ],
 [
 "Street Recurring",
@@ -1317,6 +1363,33 @@ new Date(2013,11,1),
 ],
 [
 "Street Recurring",
+new Date(2013,1,1),
+2013,
+2,
+17171,
+15.01073962,
+257749.41
+],
+[
+"Street Recurring",
+new Date(2014,5,1),
+2014,
+6,
+13864,
+14.88192369,
+206322.99
+],
+[
+"Street Recurring",
+new Date(2016,7,1),
+2016,
+8,
+9937,
+14.52639227,
+144348.76
+],
+[
+"Street Recurring",
 new Date(2015,4,1),
 2015,
 5,
@@ -1326,30 +1399,12 @@ new Date(2015,4,1),
 ],
 [
 "Street Recurring",
-new Date(2014,7,1),
+new Date(2014,2,1),
 2014,
-8,
-13508,
-15.10049674,
-203977.51
-],
-[
-"Street Recurring",
-new Date(2013,6,1),
-2013,
-7,
-15920,
-14.55949372,
-231787.14
-],
-[
-"Street Recurring",
-new Date(2014,9,1),
-2014,
-10,
-13100,
-15.15006336,
-198465.83
+3,
+14565,
+15.40297013,
+224344.26
 ],
 [
 "Street Recurring",
@@ -1359,33 +1414,6 @@ new Date(2015,1,1),
 12414,
 15.33062752,
 190314.41
-],
-[
-"Street Recurring",
-new Date(2014,11,1),
-2014,
-12,
-12576,
-14.96609256,
-188213.58
-],
-[
-"Street Recurring",
-new Date(2013,4,1),
-2013,
-5,
-16479,
-14.73169913,
-242763.67
-],
-[
-"Street Recurring",
-new Date(2016,2,1),
-2016,
-3,
-10437,
-14.63984957,
-152796.11
 ],
 [
 "Telefundraising Recurring",
@@ -1404,15 +1432,6 @@ new Date(2014,3,1),
 4125,
 24.63313212,
 101611.67
-],
-[
-"Telefundraising Recurring",
-new Date(2013,0,1),
-2013,
-1,
-3203,
-21.47265688,
-68776.92
 ],
 [
 "Telefundraising Recurring",
@@ -1440,15 +1459,6 @@ new Date(2014,4,1),
 4240,
 24.91595991,
 105643.67
-],
-[
-"Telefundraising Recurring",
-new Date(2015,11,1),
-2015,
-12,
-4923,
-27.16414585,
-133729.09
 ],
 [
 "Telefundraising Recurring",
@@ -1614,6 +1624,15 @@ new Date(2013,11,1),
 ],
 [
 "Telefundraising Recurring",
+new Date(2014,1,1),
+2014,
+2,
+3845,
+24.15375033,
+92871.17
+],
+[
+"Telefundraising Recurring",
 new Date(2015,1,1),
 2015,
 2,
@@ -1641,42 +1660,6 @@ new Date(2015,5,1),
 ],
 [
 "Telefundraising Recurring",
-new Date(2013,7,1),
-2013,
-8,
-3915,
-24.07398978,
-94249.67
-],
-[
-"Telefundraising Recurring",
-new Date(2014,0,1),
-2014,
-1,
-3861,
-24.15932919,
-93279.17
-],
-[
-"Telefundraising Recurring",
-new Date(2013,3,1),
-2013,
-4,
-3380,
-22.38148521,
-75649.42
-],
-[
-"Telefundraising Recurring",
-new Date(2015,6,1),
-2015,
-7,
-5001,
-27.14117377,
-135733.01
-],
-[
-"Telefundraising Recurring",
 new Date(2013,5,1),
 2013,
 6,
@@ -1686,75 +1669,12 @@ new Date(2013,5,1),
 ],
 [
 "Telefundraising Recurring",
-new Date(2013,8,1),
-2013,
-9,
-3793,
-24.29394147,
-92146.92
-],
-[
-"Telefundraising Recurring",
-new Date(2013,9,1),
-2013,
-10,
-3819,
-23.81118617,
-90934.92
-],
-[
-"Telefundraising Recurring",
 new Date(2015,0,1),
 2015,
 1,
 4737,
 26.02960946,
 123302.26
-],
-[
-"Telefundraising Recurring",
-new Date(2016,8,1),
-2016,
-9,
-4895,
-27.27596323,
-133515.84
-],
-[
-"Telefundraising Recurring",
-new Date(2015,4,1),
-2015,
-5,
-4792,
-26.84244783,
-128629.01
-],
-[
-"Telefundraising Recurring",
-new Date(2015,3,1),
-2015,
-4,
-4690,
-26.38838166,
-123761.51
-],
-[
-"Telefundraising Recurring",
-new Date(2014,1,1),
-2014,
-2,
-3845,
-24.15375033,
-92871.17
-],
-[
-"Telefundraising Recurring",
-new Date(2015,9,1),
-2015,
-10,
-5081,
-27.51896083,
-139823.84
 ],
 [
 "Telefundraising Recurring",
@@ -1776,6 +1696,69 @@ new Date(2013,10,1),
 ],
 [
 "Telefundraising Recurring",
+new Date(2015,3,1),
+2015,
+4,
+4690,
+26.38838166,
+123761.51
+],
+[
+"Telefundraising Recurring",
+new Date(2013,9,1),
+2013,
+10,
+3819,
+23.81118617,
+90934.92
+],
+[
+"Telefundraising Recurring",
+new Date(2013,7,1),
+2013,
+8,
+3915,
+24.07398978,
+94249.67
+],
+[
+"Telefundraising Recurring",
+new Date(2013,3,1),
+2013,
+4,
+3380,
+22.38148521,
+75649.42
+],
+[
+"Telefundraising Recurring",
+new Date(2013,0,1),
+2013,
+1,
+3203,
+21.47265688,
+68776.92
+],
+[
+"Telefundraising Recurring",
+new Date(2015,11,1),
+2015,
+12,
+4923,
+27.16414585,
+133729.09
+],
+[
+"Telefundraising Recurring",
+new Date(2014,0,1),
+2014,
+1,
+3861,
+24.15932919,
+93279.17
+],
+[
+"Telefundraising Recurring",
 new Date(2014,6,1),
 2014,
 7,
@@ -1785,12 +1768,57 @@ new Date(2014,6,1),
 ],
 [
 "Telefundraising Recurring",
+new Date(2016,8,1),
+2016,
+9,
+4895,
+27.27596323,
+133515.84
+],
+[
+"Telefundraising Recurring",
+new Date(2013,8,1),
+2013,
+9,
+3793,
+24.29394147,
+92146.92
+],
+[
+"Telefundraising Recurring",
+new Date(2015,4,1),
+2015,
+5,
+4792,
+26.84244783,
+128629.01
+],
+[
+"Telefundraising Recurring",
+new Date(2015,9,1),
+2015,
+10,
+5081,
+27.51896083,
+139823.84
+],
+[
+"Telefundraising Recurring",
 new Date(2013,4,1),
 2013,
 5,
 3550,
 22.83652676,
 81069.67
+],
+[
+"Telefundraising Recurring",
+new Date(2015,6,1),
+2015,
+7,
+5001,
+27.14117377,
+135733.01
 ] 
 ];
 data.addColumn('string','GROUP');
@@ -1805,15 +1833,15 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartMotionChartID20e46fe06520() {
-var data = gvisDataMotionChartID20e46fe06520();
+function drawChartMotionChartID20b4715f6e7f() {
+var data = gvisDataMotionChartID20b4715f6e7f();
 var options = {};
 options["width"] = 400;
 options["height"] = 300;
 options["state"] = "\n{\"xAxisOption\":\"4\",\"yAxisOption\":\"5\",\"dimensions\":{\"iconDimensions\":[\"dim0\"]}}\n";
 
     var chart = new google.visualization.MotionChart(
-    document.getElementById('MotionChartID20e46fe06520')
+    document.getElementById('MotionChartID20b4715f6e7f')
     );
     chart.draw(data,options);
     
@@ -1837,9 +1865,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartMotionChartID20e46fe06520);
+callbacks.push(drawChartMotionChartID20b4715f6e7f);
 })();
-function displayChartMotionChartID20e46fe06520() {
+function displayChartMotionChartID20b4715f6e7f() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -1863,11 +1891,11 @@ callbacks.shift()();
 </script>
  
 <!-- jsChart -->  
-<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartMotionChartID20e46fe06520"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartMotionChartID20b4715f6e7f"></script>
  
 <!-- divChart -->
   
-<div id="MotionChartID20e46fe06520" 
+<div id="MotionChartID20b4715f6e7f" 
   style="width: 400; height: 300;">
 </div>
 
@@ -1927,6 +1955,10 @@ R shiny dashboard
 ---
 ## Publish/deploy dashboard online
 
+<br></br>
+
+<center><img src="assets/img/publish.PNG" width="90%" height="90%"/></center>
+
 --- .dark
 
 <p style='font-size:100px'>
@@ -1936,14 +1968,26 @@ Write document in R
 </p>
 
 ---
-## Knitr in R
+
+## Analysis and Reporting in one environment
+<br>
+# Knitr in R
+
+   > - Write LaTex in R.
+   > - Output document can be saved in pdf fomart.
+   > - R output can be automatically generated and embedded in the pdf file.
+
+<br>
+# R slidify
+   > - Writing `css`, `html` and `R` together to produce report or presentation
 
 ---
-## Presentation in R slidify
 
----
-
-## Q & A
+## Let's enjoy R programming!!
+<br></br>
+<br></br>
+<br></br>
+<center><b> <font size="7">Q & A</font></b></center>
 
 
 
