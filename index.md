@@ -1,7 +1,7 @@
 ---
 title: "Greenpeace Insight Skillshare"
 author: "Martin Hou"
-date: '21 November, 2016'
+date: '22 November, 2016'
 output:
   ioslides_presentation:
     <!--css: styles.css -->
@@ -1928,7 +1928,7 @@ R shiny dashboard
 
 ---
 
-## Realtion between ui.R and server.R
+## Relation between ui.R and server.R
 
 <!--![relation](http://www.alternatestack.com/wp-content/uploads/2014/03/UiServerInteraction.png =100x) -->
 <br></br>

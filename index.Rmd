@@ -632,7 +632,7 @@ R shiny dashboard
 
 ---
 
-## Realtion between ui.R and server.R
+## Relation between ui.R and server.R
 
 <!--![relation](http://www.alternatestack.com/wp-content/uploads/2014/03/UiServerInteraction.png =100x) -->
 <br></br>
